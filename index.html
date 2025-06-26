@@ -278,84 +278,6 @@
       max-width: 150px;
       margin: 15px 0;
     }
-
-    /* WhatsApp Floating Button Styles */
-    .wa-float {
-      position: fixed;
-      width: auto;
-      height: 60px;
-      bottom: 30px;
-      right: 30px;
-      background: linear-gradient(135deg, #25D366, #128C7E);
-      color: white;
-      border-radius: 30px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      user-select: none;
-      padding: 0 25px;
-      gap: 12px;
-      font-weight: 600;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      border: none;
-      overflow: hidden;
-    }
-
-    .wa-float:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-      background: linear-gradient(135deg, #128C7E, #075E54);
-    }
-
-    .wa-float:active {
-      transform: translateY(1px);
-    }
-
-    .wa-float::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .wa-float:hover::after {
-      opacity: 1;
-    }
-
-    .wa-icon {
-      font-size: 28px;
-    }
-
-    .wa-text {
-      font-size: 16px;
-      white-space: nowrap;
-    }
-
-    /* Animasi ripple */
-    .ripple-effect {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      transform: scale(0);
-      animation: ripple 0.6s linear;
-      pointer-events: none;
-    }
-
-    @keyframes ripple {
-      to {
-        transform: scale(2.5);
-        opacity: 0;
-      }
-    }
     
     @media (max-width: 768px) {
       .accordion {
@@ -370,20 +292,6 @@
       
       .panel-content {
         padding: 15px;
-      }
-
-      /* WhatsApp Button Mobile */
-      .wa-float {
-        height: 50px;
-        padding: 0 20px;
-        bottom: 20px;
-        right: 20px;
-      }
-      .wa-icon {
-        font-size: 24px;
-      }
-      .wa-text {
-        font-size: 14px;
       }
     }
   </style>  
@@ -419,7 +327,7 @@
       </button>  
       <div class="panel">
         <div class="panel-content">
-          <p><strong>ZBOND</strong> lahir dari semangat sekumpulan anak muda di Situbondo yang peduli terhadap kemajuan daerahnya. Nama ZBOND sendiri terinspirasi dari cara anak muda menyebut Situbondo dengan istilah gaul "Zhibon", yang kemudian dikembangkan menjadi identitas digital lokal yang kreatif dan penuh makna.
+          <p><strong>ZBOND</strong> lahir dari semangat sekumpulan anak muda di Situbondo yang peduli terhadap kemajuan daerahnya. Nama ZBOND sendiri terinspirasi dari cara anak muda menyebut Situbondo dengan istilah gaul “Zhibon”, yang kemudian dikembangkan menjadi identitas digital lokal yang kreatif dan penuh makna.
 <br><br>
 Pada tahun 2025, mereka akan membentuk sebuah gerakan bernama BOSKU (Badan Organisasi Situbondo Komunitas UMKM), yang bertujuan untuk mendorong kemajuan UMKM, digitalisasi desa, dan pemberdayaan komunitas melalui teknologi.
 <br><br>
@@ -601,12 +509,6 @@ Alamat: Perum Taman Permata Indah<br>
     </div>
   </main>
 
-  <!-- WhatsApp Floating Button -->
-  <button id="whatsappBtn" class="wa-float">
-    <i class="fab fa-whatsapp wa-icon"></i>
-    <span class="wa-text">Hubungi Kami</span>
-  </button>
-
   <footer>    
     <p>&copy; 2023 ZBOND - Power By BOSKU.</p>
   </footer>  
@@ -670,117 +572,6 @@ Alamat: Perum Taman Permata Indah<br>
             behavior: 'smooth'
           });
         });
-      });
-
-      // WhatsApp Button Functionality
-      const whatsappBtn = document.getElementById('whatsappBtn');
-      let isDragging = false;
-      let startX, startY, initialX, initialY;
-
-      // Function for ripple effect
-      function createRipple(event) {
-        const ripple = document.createElement('span');
-        ripple.classList.add('ripple-effect');
-        
-        const rect = event.currentTarget.getBoundingClientRect();
-        const size = Math.max(rect.width, rect.height);
-        
-        ripple.style.width = ripple.style.height = `${size}px`;
-        ripple.style.left = `${event.clientX - rect.left - size/2}px`;
-        ripple.style.top = `${event.clientY - rect.top - size/2}px`;
-        
-        event.currentTarget.appendChild(ripple);
-        
-        ripple.addEventListener('animationend', () => {
-          ripple.remove();
-        });
-      }
-
-      // Function to redirect to WhatsApp
-      whatsappBtn.addEventListener('click', function(e) {
-        if (!isDragging) {
-          createRipple(e);
-          setTimeout(() => {
-            window.open('https://wa.me/6283186727167', '_blank');
-          }, 200);
-        }
-      });
-
-      // Start drag
-      whatsappBtn.addEventListener('mousedown', function(e) {
-        isDragging = false;
-        startX = e.clientX;
-        startY = e.clientY;
-        initialX = whatsappBtn.offsetLeft;
-        initialY = whatsappBtn.offsetTop;
-        whatsappBtn.style.cursor = 'grabbing';
-        whatsappBtn.style.transition = 'none';
-        e.preventDefault();
-      });
-
-      // Move button
-      document.addEventListener('mousemove', function(e) {
-        if (whatsappBtn.style.cursor === 'grabbing') {
-          const dx = e.clientX - startX;
-          const dy = e.clientY - startY;
-          
-          if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-            isDragging = true;
-          }
-          
-          if (isDragging) {
-            whatsappBtn.style.left = `${initialX + dx}px`;
-            whatsappBtn.style.top = `${initialY + dy}px`;
-            whatsappBtn.style.right = 'auto';
-            whatsappBtn.style.bottom = 'auto';
-          }
-        }
-      });
-
-      // End drag
-      document.addEventListener('mouseup', function() {
-        if (whatsappBtn.style.cursor === 'grabbing') {
-          whatsappBtn.style.cursor = 'pointer';
-          whatsappBtn.style.transition = 'all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)';
-        }
-      });
-
-      // For touch devices (mobile)
-      whatsappBtn.addEventListener('touchstart', function(e) {
-        isDragging = false;
-        const touch = e.touches[0];
-        startX = touch.clientX;
-        startY = touch.clientY;
-        initialX = whatsappBtn.offsetLeft;
-        initialY = whatsappBtn.offsetTop;
-        e.preventDefault();
-      });
-
-      document.addEventListener('touchmove', function(e) {
-        const touch = e.touches[0];
-        const dx = touch.clientX - startX;
-        const dy = touch.clientY - startY;
-        
-        if (Math.abs(dx) > 5 || Math.abs(dy) > 5) {
-          isDragging = true;
-        }
-        
-        if (isDragging) {
-          whatsappBtn.style.left = `${initialX + dx}px`;
-          whatsappBtn.style.top = `${initialY + dy}px`;
-          whatsappBtn.style.right = 'auto';
-          whatsappBtn.style.bottom = 'auto';
-          e.preventDefault();
-        }
-      });
-
-      document.addEventListener('touchend', function(e) {
-        if (!isDragging) {
-          createRipple({ currentTarget: whatsappBtn, clientX: e.changedTouches[0].clientX, clientY: e.changedTouches[0].clientY });
-          setTimeout(() => {
-            window.open('https://wa.me/6283186727167', '_blank');
-          }, 200);
-        }
       });
     });
   </script>  
