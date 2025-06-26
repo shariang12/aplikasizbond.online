@@ -1,0 +1,196 @@
+
+<!DOCTYPE html>
+<html lang="id">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
+  <title>ZBOND Info</title>  
+  <style>  
+    body {  
+      font-family: Arial, sans-serif;  
+      margin: 0;  
+      padding: 0;  
+      background-color: #f5fefe;  
+      color: #333;  
+      text-align: center;
+    }  
+    .gif-frame {  
+      position: relative;  
+      display: block;  
+      width: 100%;  
+      max-width: 440px;  
+      margin: 20px auto;  
+    }  
+    .img-center {  
+      display: block;  
+      width: 100%;  
+      border-radius: 10px;  
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);  
+    }  
+    .scrolling-text-container {  
+      position: absolute;  
+      top: 10px;  
+      left: 0;  
+      width: 100%;  
+      overflow: hidden;  
+      white-space: nowrap;  
+      pointer-events: none;  
+    }  
+    .scrolling-text {  
+      display: inline-block;  
+      padding-left: 100%;  
+      animation: scroll-left 15s linear infinite;  
+      font-weight: bold;  
+      font-size: 13px;  
+      color: white;  
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);  
+    }  
+    .scrolling-text .datetime {  
+      color: yellow;  
+      margin-left: 10px;  
+    }  
+    @keyframes scroll-left {  
+      0% { transform: translateX(0%); }  
+      100% { transform: translateX(-100%); }  
+    }  
+    .accordion {  
+      background-color: #3ac7bd;  
+      color: #fff;  
+      cursor: pointer;  
+      padding: 16px;  
+      width: 100%;  
+      border: none;  
+      text-align: left;  
+      outline: none;  
+      font-size: 16px;  
+      transition: background-color 0.3s ease;  
+      border-top: 1px solid #d0f0ed;  
+    }  
+    .accordion:hover, .active {  
+      background-color: #0f736d;  
+    }  
+    .accordion:after {  
+      content: '▼';  
+      color: #fff;  
+      float: right;  
+      font-weight: bold;  
+    }  
+    .active:after {  
+      content: '▲';  
+    }  
+    .panel {  
+      padding: 0 18px;  
+      background-color: #f0fdfa;  
+      max-height: 0;  
+      overflow: hidden;  
+      transition: max-height 0.3s ease-out;  
+      border-bottom: 1px solid #d0f0ed;  
+      text-align: left;
+    }  
+    .panel p, .panel ol, .panel ul {
+      margin: 15px 0;
+    }
+    .panel img {  
+      max-width: 100%;  
+      border-radius: 8px;  
+    }  
+    .info-box {  
+      margin: 20px auto;  
+      background: #0f736d;  
+      color: white;  
+      padding: 12px;  
+      border-radius: 8px;  
+      max-width: 500px;  
+      text-align: center;  
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);  
+    }  
+    .info-box marquee {  
+      font-weight: bold;  
+    }  
+    footer {  
+      background-color: #0f736d;  
+      color: white;  
+      text-align: center;  
+      padding: 12px;  
+      margin-top: 40px;  
+      font-size: 14px;  
+    }
+    .btn-download {
+      background: linear-gradient(to bottom, #000000, #222222);
+      color: #ffffff;
+      padding: 16px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 8px 0 #444;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      margin: 40px auto 20px;
+      transition: all 0.2s ease;
+    }
+    .btn-download:active {
+      transform: translateY(6px);
+      box-shadow: 0 2px 0 #444;
+    }
+    .btn-download:hover {
+      background: linear-gradient(to bottom, #111111, #333333);
+    }
+  </style>  
+</head>  
+<body>  
+  <div class="gif-frame">  
+    <img class="img-center" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcVmRJ1tLqHLqWYmnfAExB-_doq679TnTb4IzgfGLogZDtatDvGIZhQI8sVQQutrQYleAXNVla8YIymiQCumPjcZ3a3n6WYxS8nD_4A_C57Tgeq3ryayrOHWwbqjIOjt0wvqHTY_I8OsQGJEoJNv8CVcy9z1sS84A8iu4iGOxLQ7rk5P0Gc_JEeoTAxQ/s400/1000054996.gif" alt="Promo">  
+    <div class="scrolling-text-container">  
+      <div class="scrolling-text">  
+        ⬅️ ZBOND ➡️ Power By BOSKU | <span class="datetime" id="dateTime"></span>  
+      </div>  
+    </div>  
+  </div>  
+
+  <button class="accordion">SEJARAH</button>  
+  <div class="panel"><p><strong>ZBOND</strong> lahir dari semangat sekumpulan anak muda ...</p></div>  
+  <button class="accordion">VISI DAN MISI</button>  
+  <div class="panel"><p><strong>VISI ZBOND:</strong> Menjadi platform digital komunitas ...</p></div>  
+  <button class="accordion">STRUKTUR BOSKU</button>  
+  <div class="panel"><p><strong>Pembina:</strong> - <br><strong>Ketua :</strong> - <br><strong>Bendahara :</strong> - <br><strong>Seketaris :</strong> - <br><strong>Humas :</strong> - </p></div>  
+  <button class="accordion">KANTOR PUSAT</button>  
+  <div class="panel"><p><strong>Alamat:</strong><br>ZBOND<br>-</p></div>  
+  <button class="accordion">LEGALITAS</button>  
+  <div class="panel"><p>ZBOND adalah program unggulan BOSKU ...</p></div>  
+  <button class="accordion">KEBIJAKAN PRIVASI</button>  
+  <div class="panel"><p><strong>Tanggal Berlaku:</strong> 17 Agustus 2025</p></div>  
+
+  <a class="btn-download" href="https://drive.google.com/uc?export=download&id=13HI-9wJ0ouwjrnTnh2HpIzMy8LByKGIL" download>
+    DOWNLOAD APLIKASI
+  </a>
+
+  <footer>Supported by - PEMKAB SITUBONDO</footer>  
+
+  <script>  
+    const acc = document.getElementsByClassName("accordion");  
+    for (let i = 0; i < acc.length; i++) {  
+      acc[i].addEventListener("click", function() {  
+        this.classList.toggle("active");  
+        const panel = this.nextElementSibling;  
+        if (panel.style.maxHeight) {  
+          panel.style.maxHeight = null;  
+        } else {  
+          panel.style.maxHeight = panel.scrollHeight + "px";  
+        }  
+      });  
+    }  
+    function updateDateTime() {  
+      const now = new Date();  
+      const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];  
+      const day = days[now.getDay()];  
+      const date = now.toLocaleDateString("id-ID");  
+      const time = now.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' });  
+      document.getElementById("dateTime").textContent = `${day}, ${date} ${time}`;  
+    }  
+    setInterval(updateDateTime, 1000);  
+    updateDateTime();  
+  </script>  
+</body>  
+</html>
