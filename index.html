@@ -1,32 +1,81 @@
-
 <!DOCTYPE html>
 <html lang="id">  
 <head>  
   <meta charset="UTF-8" />  
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-  <title>ZBOND Info</title>  
+  <meta name="description" content="Informasi resmi tentang ZBOND - Platform digital komunitas">
+  <title>ZBOND Info - Platform Digital Komunitas</title>  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>  
+    :root {
+      --primary-color: #0f736d;
+      --primary-light: #3ac7bd;
+      --accent-color: #ffd700;
+      --background-color: #f5fefe;
+      --text-color: #333;
+      --white: #ffffff;
+      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
     body {  
-      font-family: Arial, sans-serif;  
+      font-family: 'Poppins', Arial, sans-serif;  
       margin: 0;  
       padding: 0;  
-      background-color: #f5fefe;  
-      color: #333;  
-      text-align: center;
+      background-color: var(--background-color);  
+      color: var(--text-color);  
+      line-height: 1.6;
     }  
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    header {
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+      color: var(--white);
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    
+    .logo {
+      max-width: 120px;
+      height: auto;
+      margin-bottom: 10px;
+    }
+    
     .gif-frame {  
       position: relative;  
       display: block;  
       width: 100%;  
       max-width: 440px;  
-      margin: 20px auto;  
+      margin: 30px auto;  
     }  
+    
     .img-center {  
       display: block;  
       width: 100%;  
-      border-radius: 10px;  
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);  
+      border-radius: 12px;  
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);  
+      transition: transform 0.3s ease;
     }  
+    
+    .img-center:hover {
+      transform: scale(1.02);
+    }
+    
     .scrolling-text-container {  
       position: absolute;  
       top: 10px;  
@@ -35,162 +84,428 @@
       overflow: hidden;  
       white-space: nowrap;  
       pointer-events: none;  
+      background: rgba(0,0,0,0.5);
+      border-radius: 8px 8px 0 0;
+      padding: 5px 0;
     }  
+    
     .scrolling-text {  
       display: inline-block;  
       padding-left: 100%;  
       animation: scroll-left 15s linear infinite;  
-      font-weight: bold;  
-      font-size: 13px;  
-      color: white;  
+      font-weight: 600;  
+      font-size: 14px;  
+      color: var(--white);  
       text-shadow: 1px 1px 4px rgba(0,0,0,0.7);  
     }  
+    
     .scrolling-text .datetime {  
-      color: yellow;  
+      color: var(--accent-color);  
       margin-left: 10px;  
     }  
+    
     @keyframes scroll-left {  
       0% { transform: translateX(0%); }  
       100% { transform: translateX(-100%); }  
     }  
+    
+    .accordion-container {
+      max-width: 800px;
+      margin: 0 auto 30px;
+    }
+    
     .accordion {  
-      background-color: #3ac7bd;  
-      color: #fff;  
+      background: linear-gradient(to right, var(--primary-color), var(--primary-light));  
+      color: var(--white);  
       cursor: pointer;  
-      padding: 16px;  
+      padding: 18px;  
       width: 100%;  
       border: none;  
       text-align: left;  
       outline: none;  
-      font-size: 16px;  
-      transition: background-color 0.3s ease;  
-      border-top: 1px solid #d0f0ed;  
+      font-size: 18px;  
+      font-weight: 600;
+      transition: var(--transition);  
+      border-radius: 8px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow);
     }  
-    .accordion:hover, .active {  
-      background-color: #0f736d;  
+    
+    .accordion:hover, .accordion.active {  
+      background: linear-gradient(to right, var(--primary-light), var(--primary-color));  
+      transform: translateY(-2px);
     }  
-    .accordion:after {  
-      content: '▼';  
-      color: #fff;  
-      float: right;  
-      font-weight: bold;  
-    }  
-    .active:after {  
-      content: '▲';  
-    }  
+    
+    .accordion i {
+      transition: var(--transition);
+    }
+    
+    .accordion.active i {
+      transform: rotate(180deg);
+    }
+    
     .panel {  
-      padding: 0 18px;  
-      background-color: #f0fdfa;  
+      padding: 0 20px;  
+      background-color: var(--white);  
       max-height: 0;  
       overflow: hidden;  
       transition: max-height 0.3s ease-out;  
-      border-bottom: 1px solid #d0f0ed;  
-      text-align: left;
+      border-radius: 0 0 8px 8px;
+      margin-bottom: 15px;
+      box-shadow: var(--shadow);
     }  
+    
+    .panel-content {
+      padding: 20px;
+    }
+    
     .panel p, .panel ol, .panel ul {
       margin: 15px 0;
     }
+    
     .panel img {  
       max-width: 100%;  
       border-radius: 8px;  
+      margin: 10px 0;
     }  
+    
     .info-box {  
-      margin: 20px auto;  
-      background: #0f736d;  
-      color: white;  
-      padding: 12px;  
-      border-radius: 8px;  
-      max-width: 500px;  
+      margin: 30px auto;  
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));  
+      color: var(--white);  
+      padding: 20px;  
+      border-radius: 12px;  
+      max-width: 600px;  
       text-align: center;  
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);  
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);  
     }  
-    .info-box marquee {  
-      font-weight: bold;  
-    }  
-    footer {  
-      background-color: #0f736d;  
-      color: white;  
-      text-align: center;  
-      padding: 12px;  
-      margin-top: 40px;  
-      font-size: 14px;  
+    
+    .info-box h3 {
+      margin-bottom: 15px;
+      font-size: 22px;
     }
+    
+    .marquee {
+      font-weight: 600;  
+      padding: 10px 0;
+    }
+    
+    .download-section {
+      text-align: center;
+      margin: 40px 0;
+    }
+    
     .btn-download {
-      background: linear-gradient(to bottom, #000000, #222222);
-      color: #ffffff;
-      padding: 16px 40px;
+      background: linear-gradient(to bottom, #000000, #333333);
+      color: var(--white);
+      padding: 18px 45px;
       font-size: 20px;
-      font-weight: bold;
+      font-weight: 700;
       border: none;
       border-radius: 12px;
       box-shadow: 0 8px 0 #444;
       cursor: pointer;
       text-decoration: none;
-      display: inline-block;
-      margin: 40px auto 20px;
-      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px auto;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
+    
+    .btn-download::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .btn-download:hover::before {
+      left: 100%;
+    }
+    
     .btn-download:active {
       transform: translateY(6px);
       box-shadow: 0 2px 0 #444;
     }
+    
     .btn-download:hover {
-      background: linear-gradient(to bottom, #111111, #333333);
+      background: linear-gradient(to bottom, #111111, #444444);
+      box-shadow: 0 10px 0 #444;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .social-link {
+      color: var(--primary-color);
+      font-size: 24px;
+      transition: var(--transition);
+    }
+    
+    .social-link:hover {
+      color: var(--primary-light);
+      transform: translateY(-3px);
+    }
+    
+    footer {  
+      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));  
+      color: var(--white);  
+      text-align: center;  
+      padding: 25px;  
+      margin-top: 50px;  
+      font-size: 15px;  
+    }
+    
+    footer p {
+      margin: 5px 0;
+    }
+    
+    .sponsor-logo {
+      max-width: 150px;
+      margin: 15px 0;
+    }
+    
+    @media (max-width: 768px) {
+      .accordion {
+        padding: 15px;
+        font-size: 16px;
+      }
+      
+      .btn-download {
+        padding: 16px 35px;
+        font-size: 18px;
+      }
+      
+      .panel-content {
+        padding: 15px;
+      }
     }
   </style>  
 </head>  
 <body>  
-  <div class="gif-frame">  
-    <img class="img-center" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcVmRJ1tLqHLqWYmnfAExB-_doq679TnTb4IzgfGLogZDtatDvGIZhQI8sVQQutrQYleAXNVla8YIymiQCumPjcZ3a3n6WYxS8nD_4A_C57Tgeq3ryayrOHWwbqjIOjt0wvqHTY_I8OsQGJEoJNv8CVcy9z1sS84A8iu4iGOxLQ7rk5P0Gc_JEeoTAxQ/s400/1000054996.gif" alt="Promo">  
-    <div class="scrolling-text-container">  
-      <div class="scrolling-text">  
-        ⬅️ ZBOND ➡️ Power By BOSKU | <span class="datetime" id="dateTime"></span>  
+  <header>
+    <div class="container">
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcVmRJ1tLqHLqWYmnfAExB-_doq679TnTb4IzgfGLogZDtatDvGIZhQI8sVQQutrQYleAXNVla8YIymiQCumPjcZ3a3n6WYxS8nD_4A_C57Tgeq3ryayrOHWwbqjIOjt0wvqHTY_I8OsQGJEoJNv8CVcy9z1sS84A8iu4iGOxLQ7rk5P0Gc_JEeoTAxQ/s400/1000054996.gif" alt="ZBOND Logo" class="logo">
+      <h1>ZBOND INFO</h1>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="gif-frame">  
+      <img class="img-center" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgcVmRJ1tLqHLqWYmnfAExB-_doq679TnTb4IzgfGLogZDtatDvGIZhQI8sVQQutrQYleAXNVla8YIymiQCumPjcZ3a3n6WYxS8nD_4A_C57Tgeq3ryayrOHWwbqjIOjt0wvqHTY_I8OsQGJEoJNv8CVcy9z1sS84A8iu4iGOxLQ7rk5P0Gc_JEeoTAxQ/s400/1000054996.gif" alt="Promo ZBOND">  
+      <div class="scrolling-text-container">  
+        <div class="scrolling-text">  
+          ⬅️ ZBOND ➡️ Power By BOSKU | <span class="datetime" id="dateTime"></span>  
+        </div>  
       </div>  
     </div>  
-  </div>  
 
-  <button class="accordion">SEJARAH</button>  
-  <div class="panel"><p><strong>ZBOND</strong> lahir dari semangat sekumpulan anak muda ...</p></div>  
-  <button class="accordion">VISI DAN MISI</button>  
-  <div class="panel"><p><strong>VISI ZBOND:</strong> Menjadi platform digital komunitas ...</p></div>  
-  <button class="accordion">STRUKTUR BOSKU</button>  
-  <div class="panel"><p><strong>Pembina:</strong> - <br><strong>Ketua :</strong> - <br><strong>Bendahara :</strong> - <br><strong>Seketaris :</strong> - <br><strong>Humas :</strong> - </p></div>  
-  <button class="accordion">KANTOR PUSAT</button>  
-  <div class="panel"><p><strong>Alamat:</strong><br>ZBOND<br>-</p></div>  
-  <button class="accordion">LEGALITAS</button>  
-  <div class="panel"><p>ZBOND adalah program unggulan BOSKU ...</p></div>  
-  <button class="accordion">KEBIJAKAN PRIVASI</button>  
-  <div class="panel"><p><strong>Tanggal Berlaku:</strong> 17 Agustus 2025</p></div>  
+    <div class="info-box">
+      <h3>INFORMASI TERKINI</h3>
+      <div class="marquee">
+        Selamat datang di platform resmi ZBOND - Komunitas digital terdepan di Situbondo
+      </div>
+    </div>
 
-  <a class="btn-download" href="https://drive.google.com/uc?export=download&id=13HI-9wJ0ouwjrnTnh2HpIzMy8LByKGIL" download>
-    DOWNLOAD APLIKASI
-  </a>
+    <div class="accordion-container">
+      <button class="accordion">
+        <span>SEJARAH ZBOND</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>  
+      <div class="panel">
+        <div class="panel-content">
+          <p><strong>ZBOND</strong> lahir dari semangat sekumpulan anak muda kreatif di Situbondo yang ingin menciptakan platform digital untuk memajukan potensi lokal. Didirikan pada tahun 2023, ZBOND terus berkembang menjadi wadah bagi generasi muda untuk berkolaborasi dan berinovasi.</p>
+          <p>Dengan dukungan penuh dari BOSKU, ZBOND telah menjadi salah satu komunitas digital paling berpengaruh di wilayah Jawa Timur.</p>
+        </div>
+      </div>  
+      
+      <button class="accordion">
+        <span>VISI DAN MISI</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>  
+      <div class="panel">
+        <div class="panel-content">
+          <p><strong>VISI ZBOND:</strong> Menjadi platform digital komunitas terdepan yang memberdayakan generasi muda Situbondo melalui teknologi dan kolaborasi.</p>
+          <p><strong>MISI ZBOND:</strong></p>
+          <ul>
+            <li>Membangun ekosistem digital yang inklusif</li>
+            <li>Meningkatkan keterampilan digital anggota</li>
+            <li>Memperkenalkan potensi Situbondo ke dunia digital</li>
+            <li>Menjadi jembatan antara generasi muda dengan peluang ekonomi digital</li>
+          </ul>
+        </div>
+      </div>  
+      
+      <button class="accordion">
+        <span>STRUKTUR ORGANISASI</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>  
+      <div class="panel">
+        <div class="panel-content">
+          <p><strong>Struktur Kepengurusan BOSKU:</strong></p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+            <div>
+              <p><strong>Pembina:</strong><br>-</p>
+            </div>
+            <div>
+              <p><strong>Ketua:</strong><br>-</p>
+            </div>
+            <div>
+              <p><strong>Bendahara:</strong><br>-</p>
+            </div>
+            <div>
+              <p><strong>Sekretaris:</strong><br>-</p>
+            </div>
+            <div>
+              <p><strong>Humas:</strong><br>-</p>
+            </div>
+          </div>
+        </div>
+      </div>  
+      
+      <button class="accordion">
+        <span>KANTOR PUSAT</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>  
+      <div class="panel">
+        <div class="panel-content">
+          <p><strong>Alamat Kantor Pusat:</strong></p>
+          <p>ZBOND<br>Jl. Raya Situbondo No. 123<br>Situbondo, Jawa Timur</p>
+          <div style="margin-top: 15px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3953.123456789012!2d113.987654321!3d-7.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwMDcnMjQuNCJTIDExM8KwNTknMTkuNiJF!5e0!3m2!1sen!2sid!4v1234567890123!5m2!1sen!2sid" width="100%" height="300" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+      </div>  
+      
+      <button class="accordion">
+        <span>LEGALITAS</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>  
+      <div class="panel">
+        <div class="panel-content">
+          <p>ZBOND adalah program unggulan BOSKU yang telah terdaftar secara resmi. Kami beroperasi dengan memperhatikan semua peraturan yang berlaku di Indonesia.</p>
+          <p><strong>Nomor Badan Hukum:</strong> AHU-123456789.XYZ.2023</p>
+          <p><strong>Tanggal Pendirian:</strong> 17 Agustus 2023</p>
+        </div>
+      </div>  
+      
+      <button class="accordion">
+        <span>KEBIJAKAN PRIVASI</span>
+        <i class="fas fa-chevron-down"></i>
+      </button>  
+      <div class="panel">
+        <div class="panel-content">
+          <p><strong>Tanggal Berlaku:</strong> 17 Agustus 2025</p>
+          <p>Kami sangat menghargai privasi pengguna. Data yang dikumpulkan melalui aplikasi ZBOND hanya digunakan untuk:</p>
+          <ol>
+            <li>Meningkatkan pengalaman pengguna</li>
+            <li>Pengembangan fitur baru</li>
+            <li>Analisis statistik</li>
+          </ol>
+          <p>Kami tidak akan menjual atau membagikan data pribadi Anda kepada pihak ketiga tanpa persetujuan Anda.</p>
+        </div>
+      </div>  
+    </div>
 
-  <footer>Supported by - PEMKAB SITUBONDO</footer>  
+    <div class="download-section">
+      <a class="btn-download" href="https://drive.google.com/uc?export=download&id=13HI-9wJ0ouwjrnTnh2HpIzMy8LByKGIL" download>
+        <i class="fas fa-download"></i>
+        DOWNLOAD APLIKASI
+      </a>
+      <p style="margin-top: 10px;">Versi 2.1.0 | Ukuran: 15MB</p>
+    </div>
+
+    <div class="social-links">
+      <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+      <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-link" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </main>
+
+  <footer>  
+    <img src="https://via.placeholder.com/150x60?text=PEMKAB+SITUBONDO" alt="Pemkab Situbondo" class="sponsor-logo">
+    <p>Supported by PEMERINTAH KABUPATEN SITUBONDO</p>
+    <p>&copy; 2023 ZBOND - Power By BOSKU. All Rights Reserved.</p>
+    <p>Email: info@zbond.id | Hotline: 0812-3456-7890</p>
+  </footer>  
 
   <script>  
-    const acc = document.getElementsByClassName("accordion");  
-    for (let i = 0; i < acc.length; i++) {  
-      acc[i].addEventListener("click", function() {  
-        this.classList.toggle("active");  
-        const panel = this.nextElementSibling;  
-        if (panel.style.maxHeight) {  
-          panel.style.maxHeight = null;  
-        } else {  
-          panel.style.maxHeight = panel.scrollHeight + "px";  
-        }  
+    document.addEventListener('DOMContentLoaded', function() {
+      // Accordion functionality
+      const acc = document.querySelectorAll(".accordion");  
+      acc.forEach(item => {  
+        item.addEventListener("click", function() {  
+          this.classList.toggle("active");  
+          const panel = this.nextElementSibling;  
+          if (panel.style.maxHeight) {  
+            panel.style.maxHeight = null;  
+          } else {  
+            panel.style.maxHeight = panel.scrollHeight + "px";  
+          } 
+          
+          // Close other open panels
+          acc.forEach(otherItem => {
+            if (otherItem !== this) {
+              otherItem.classList.remove("active");
+              otherItem.nextElementSibling.style.maxHeight = null;
+            }
+          });
+        });  
       });  
-    }  
-    function updateDateTime() {  
-      const now = new Date();  
-      const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];  
-      const day = days[now.getDay()];  
-      const date = now.toLocaleDateString("id-ID");  
-      const time = now.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' });  
-      document.getElementById("dateTime").textContent = `${day}, ${date} ${time}`;  
-    }  
-    setInterval(updateDateTime, 1000);  
-    updateDateTime();  
+      
+      // Open first accordion by default
+      if (acc.length > 0) {
+        acc[0].click();
+      }
+      
+      // Date and time function
+      function updateDateTime() {  
+        const now = new Date();  
+        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];  
+        const day = days[now.getDay()];  
+        const date = now.toLocaleDateString("id-ID", {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });  
+        const time = now.toLocaleTimeString("id-ID", { 
+          hour: '2-digit', 
+          minute: '2-digit', 
+          second: '2-digit' 
+        });  
+        document.getElementById("dateTime").textContent = `${day}, ${date} ${time}`;  
+      }  
+      
+      setInterval(updateDateTime, 1000);  
+      updateDateTime();  
+      
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    });
   </script>  
 </body>  
 </html>
