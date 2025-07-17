@@ -495,6 +495,25 @@ Alamat: Perum Taman Permata Indah<br>
       </div>  
     </div>
 
+    <div style="text-align:center;">
+  <iframe id="ytplayer" width="300" height="533" 
+    src="https://www.youtube.com/embed/AXpJkhP1IIk?autoplay=1&mute=1&loop=1&playlist=AXpJkhP1IIk&controls=0&modestbranding=1&rel=0&playsinline=1" 
+    frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+  </iframe>
+  <br>
+  <button onclick="toggleMute()" style="margin-top:10px;padding:8px 16px;background:#007166;color:white;border:none;border-radius:5px;cursor:pointer;">🔇 Mute / Unmute</button>
+</div>
+
+<script>
+  function toggleMute() {
+    const iframe = document.getElementById("ytplayer");
+    const src = iframe.src;
+    const isMuted = src.includes("mute=1");
+    const newSrc = src.replace(/mute=\d/, `mute=${isMuted ? 0 : 1}`);
+    iframe.src = newSrc;
+  }
+</script>
+
     <div class="download-section">
       <a class="btn-download" href="https://drive.google.com/uc?export=download&id=13HI-9wJ0ouwjrnTnh2HpIzMy8LByKGIL" download>
         <i class="fas fa-download"></i>
