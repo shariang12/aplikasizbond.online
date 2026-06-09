@@ -1,586 +1,1016 @@
 <!DOCTYPE html>
-<html lang="id">  
-<head>  
-  <meta charset="UTF-8" />  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>  
-  <meta name="description" content="Informasi resmi tentang ZBOND - Platform digital komunitas">
-  <title>ZBOND - Aplikasi Ojek Online Kota Tapal Kuda </title> 
-  <link rel="icon" type="image/png" href="favicon.png">
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Shariang Dev | Rekber & Digital Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>  
-    :root {
-      --primary-color: #0f736d;
-      --primary-light: #3ac7bd;
-      --accent-color: #ffd700;
-      --background-color: #f5fefe;
-      --text-color: #333;
-      --white: #ffffff;
-      --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
-    }
-    
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    body {  
-      font-family: 'Poppins', Arial, sans-serif;  
-      margin: 0;  
-      padding: 0;  
-      background-color: var(--background-color);  
-      color: var(--text-color);  
-      line-height: 1.6;
-    }  
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    header {
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
-      color: var(--white);
-      padding: 20px 0;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-    
-    .logo {
-      max-width: 120px;
-      height: auto;
-      margin-bottom: 10px;
-    }
-    
-    .gif-frame {  
-      position: relative;  
-      display: block;  
-      width: 100%;  
-      max-width: 440px;  
-      margin: 30px auto;  
-    }  
-    
-    .img-center {  
-      display: block;  
-      width: 100%;  
-      border-radius: 12px;  
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);  
-      transition: transform 0.3s ease;
-    }  
-    
-    .img-center:hover {
-      transform: scale(1.02);
-    }
-    
-    .scrolling-text-container {  
-      position: absolute;  
-      top: 10px;  
-      left: 0;  
-      width: 100%;  
-      overflow: hidden;  
-      white-space: nowrap;  
-      pointer-events: none;  
-      background: rgba(0,0,0,0.5);
-      border-radius: 8px 8px 0 0;
-      padding: 5px 0;
-    }  
-    
-    .scrolling-text {  
-      display: inline-block;  
-      padding-left: 100%;  
-      animation: scroll-left 15s linear infinite;  
-      font-weight: 600;  
-      font-size: 14px;  
-      color: var(--white);  
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);  
-    }  
-    
-    .scrolling-text .datetime {  
-      color: var(--accent-color);  
-      margin-left: 10px;  
-    }  
-    
-    @keyframes scroll-left {  
-      0% { transform: translateX(0%); }  
-      100% { transform: translateX(-100%); }  
-    }  
-    
-    .accordion-container {
-      max-width: 800px;
-      margin: 0 auto 30px;
-    }
-    
-    .accordion {  
-      background: linear-gradient(to right, var(--primary-color), var(--primary-light));  
-      color: var(--white);  
-      cursor: pointer;  
-      padding: 18px;  
-      width: 100%;  
-      border: none;  
-      text-align: left;  
-      outline: none;  
-      font-size: 18px;  
-      font-weight: 600;
-      transition: var(--transition);  
-      border-radius: 8px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow);
-    }  
-    
-    .accordion:hover, .accordion.active {  
-      background: linear-gradient(to right, var(--primary-light), var(--primary-color));  
-      transform: translateY(-2px);
-    }  
-    
-    .accordion i {
-      transition: var(--transition);
-    }
-    
-    .accordion.active i {
-      transform: rotate(180deg);
-    }
-    
-    .panel {  
-      padding: 0 20px;  
-      background-color: var(--white);  
-      max-height: 0;  
-      overflow: hidden;  
-      transition: max-height 0.3s ease-out;  
-      border-radius: 0 0 8px 8px;
-      margin-bottom: 15px;
-      box-shadow: var(--shadow);
-    }  
-    
-    .panel-content {
-      padding: 20px;
-    }
-    
-    .panel p, .panel ol, .panel ul {
-      margin: 15px 0;
-    }
-    
-    .panel img {  
-      max-width: 100%;  
-      border-radius: 8px;  
-      margin: 10px 0;
-    }  
-    
-    .info-box {  
-      margin: 30px auto;  
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));  
-      color: var(--white);  
-      padding: 20px;  
-      border-radius: 12px;  
-      max-width: 600px;  
-      text-align: center;  
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);  
-    }  
-    
-    .info-box h3 {
-      margin-bottom: 15px;
-      font-size: 22px;
-    }
-    
-    .marquee {
-      font-weight: 600;  
-      padding: 10px 0;
-    }
-    
-    .download-section {
-      text-align: center;
-      margin: 40px 0;
-    }
-    
-    .btn-download {
-      background: linear-gradient(to bottom, #000000, #333333);
-      color: var(--white);
-      padding: 18px 45px;
-      font-size: 20px;
-      font-weight: 700;
-      border: none;
-      border-radius: 12px;
-      box-shadow: 0 8px 0 #444;
-      cursor: pointer;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin: 20px auto;
-      transition: var(--transition);
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #0A0A0A;
+      background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.008) 0px, rgba(255,255,255,0.008) 2px, transparent 2px, transparent 8px);
+      min-height: 100vh;
+      color: #C0C0C0;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+      -webkit-tap-highlight-color: transparent;
       position: relative;
-      overflow: hidden;
     }
-    
-    .btn-download::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle at 30% 40%, rgba(192,192,192,0.06) 0%, transparent 30%),
+                        linear-gradient(135deg, rgba(10,10,10,0.98) 0%, #0a0a0a 100%);
+      background-size: 100% 100%, 4px 4px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .main-container {
+      position: relative;
+      z-index: 2;
       width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: 0.5s;
-    }
-    
-    .btn-download:hover::before {
-      left: 100%;
-    }
-    
-    .btn-download:active {
-      transform: translateY(6px);
-      box-shadow: 0 2px 0 #444;
-    }
-    
-    .btn-download:hover {
-      background: linear-gradient(to bottom, #111111, #444444);
-      box-shadow: 0 10px 0 #444;
-    }
-    
-    .social-links {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 10px;
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin: 30px 0;
+      flex-direction: column;
+      gap: 0.7rem;
     }
-    
-    .social-link {
-      color: var(--primary-color);
-      font-size: 24px;
-      transition: var(--transition);
+
+    /* 3D metallic utilities */
+    .metal-text {
+      background: linear-gradient(180deg, #E8E8E8 0%, #A0A0A0 60%, #707070 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.6);
+      letter-spacing: 0.02em;
     }
-    
-    .social-link:hover {
-      color: var(--primary-light);
-      transform: translateY(-3px);
+    .emboss {
+      text-shadow: 0 -1px 0 rgba(255,255,255,0.25), 0 1px 3px rgba(0,0,0,0.8);
     }
-    
-    footer {  
-      background: linear-gradient(135deg, var(--primary-color), var(--primary-light));  
-      color: var(--white);  
-      text-align: center;  
-      padding: 25px;  
-      margin-top: 50px;  
-      font-size: 15px;  
+    .steel-plate {
+      background: linear-gradient(145deg, #2a2a2a, #1a1a1a, #0f0f0f);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.2), 0 0 8px rgba(255,23,68,0.3);
+      border: 1px solid rgba(192,192,192,0.2);
     }
-    
-    footer p {
-      margin: 5px 0;
+    .steel-plate-light {
+      background: linear-gradient(145deg, #2a2a2a, #1a1a1a, #0f0f0f);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 1px 1px rgba(255,255,255,0.15);
+      border: 1px solid rgba(192,192,192,0.15);
     }
-    
-    .sponsor-logo {
-      max-width: 150px;
-      margin: 15px 0;
+    .metal-press:active {
+      transform: scale(0.96) translateY(2px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.9), inset 0 2px 5px rgba(0,0,0,0.7);
     }
-    
-    .video-container {
-      text-align: center;
-      margin: 30px 0;
+    .card-3d {
+      transition: all 0.25s ease;
+      transform: perspective(600px) translateZ(0);
     }
-    
-    .video-wrapper {
-      position: relative;
+    .card-3d:hover {
+      transform: perspective(600px) translateZ(8px) translateY(-4px);
+      box-shadow: 0 20px 30px -10px rgba(255,23,68,0.5), 0 0 20px #FF1744;
+    }
+
+    /* Danger pulse animation */
+    @keyframes dangerPulse {
+      0%, 100% { 
+        box-shadow: 0 0 8px #FF1744, 0 0 16px rgba(255,23,68,0.5), inset 0 0 4px rgba(255,255,255,0.1);
+        transform: scale(1);
+      }
+      25% {
+        box-shadow: 0 0 20px #FF1744, 0 0 40px rgba(255,23,68,0.8), inset 0 0 8px rgba(255,255,255,0.2);
+        transform: scale(1.02);
+      }
+      50% {
+        box-shadow: 0 0 8px #FF1744, 0 0 16px rgba(255,23,68,0.5), inset 0 0 4px rgba(255,255,255,0.1);
+        transform: scale(1);
+      }
+      75% {
+        box-shadow: 0 0 25px #FF1744, 0 0 50px rgba(255,23,68,0.9), inset 0 0 10px rgba(255,255,255,0.25);
+        transform: scale(1.03);
+      }
+    }
+    .danger-pulse {
+      animation: dangerPulse 1.5s infinite;
+      background: linear-gradient(145deg, #FF1744, #b01030);
+      border: 1px solid rgba(255,23,68,0.6);
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: all 0.2s;
+    }
+    .danger-pulse:hover {
+      animation: dangerPulse 0.8s infinite;
+      box-shadow: 0 0 30px #FF1744, 0 0 60px rgba(255,23,68,0.9);
+    }
+
+    /* Particles */
+    .particle {
+      position: fixed;
+      background: rgba(192,192,192,0.4);
+      border-radius: 50%;
+      filter: blur(0.6px);
+      animation: floatParticle 8s infinite ease-in-out;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+      50% { opacity: 0.45; transform: translateY(-30px) rotate(10deg); }
+      100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+    }
+
+    /* Accordion */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s cubic-bezier(0.33, 1, 0.68, 1), padding 0.3s;
+      padding: 0 1rem;
+    }
+    .accordion-content.open {
+      max-height: 450px;
+      padding: 1rem;
+    }
+    .rotate-icon {
+      transition: transform 0.4s ease;
       display: inline-block;
     }
-    
-    .mute-toggle {
-      margin-top: 10px;
-      padding: 8px 16px;
-      background: var(--primary-color);
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: var(--transition);
+    .rotate-icon.open { transform: rotate(180deg); }
+
+    /* Logo entry animation */
+    @keyframes logoEntry {
+      0% { transform: rotateY(360deg) scale(0.3); opacity: 0; }
+      70% { transform: rotateY(20deg) scale(1.03); }
+      100% { transform: rotateY(0deg) scale(1); opacity: 1; }
     }
-    
-    .mute-toggle:hover {
-      background: var(--primary-light);
+    .logo-animate { animation: logoEntry 1.2s ease-out; }
+
+    /* WA pulse */
+    @keyframes waPulse {
+      0%, 100% { box-shadow: 0 0 15px #FF1744, 0 0 30px rgba(255,23,68,0.5); }
+      50% { box-shadow: 0 0 25px #FF1744, 0 0 50px rgba(255,23,68,0.8); }
     }
-    
-    @media (max-width: 768px) {
-      .accordion {
-        padding: 15px;
-        font-size: 16px;
-      }
-      
-      .btn-download {
-        padding: 16px 35px;
-        font-size: 18px;
-      }
-      
-      .panel-content {
-        padding: 15px;
-      }
-      
-      iframe {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16/9;
-      }
+    .wa-pulse { animation: waPulse 2s infinite; }
+
+    /* Pulse dot */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.5); }
     }
-  </style>  
-</head>  
-<body>  
-  <header>
-    <div class="container">   
-      <h1>www.zbond.online</h1>
-    </div>
-  </header>
 
-  <main class="container">
-    <div class="gif-frame">  
-      <img class="img-center" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjlkljSX_sRwnObcb61QMefAu-MFt7V2bjz0bo7SmLFlti_578mYlC0mfJ5aaENUSpGvJctop3_7k8vsp5vcR-hyr2ZRoCI49vnbsnyTvPtgXsUxsSCJWkAYCE1IC9NiB-z8LUtP2hkLOkMytRvTrrBzNVDe8iYeTx6gzx3LrfC5TkqOuDPyBQbMG3vMg/s400/1000090909.gif" alt="Promo ZBOND">  
-      <div class="scrolling-text-container">  
-        <div class="scrolling-text">  
-          ⬅️ ZBOND ➡️ Power By PT. ZBOND DIGITAL GROUP | <span class="datetime" id="dateTime"></span>  ZBOND adalah pelaku UMKM yang mendorong pertumbuhan usaha lokal, pemasaran digital, serta pelatihan berkelanjutan demi meningkatkan daya saing UMKM di era digital.
-        </div>  
-      </div>  
-    </div>
-
-    <div class="accordion-container">
-      <button class="accordion">
-        <span>SEJARAH ZBOND</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>  
-      <div class="panel">
-        <div class="panel-content">
-          <p><strong>ZBOND</strong> adalah sebuah inisiatif digital karya anak muda Situbondo yang ingin membranding daerahnya secara modern dan inklusif. Nama <strong>ZBOND</strong> sendiri terinspirasi dari cara penyebutan lokal <strong>“Shibon”</strong> untuk <strong>Situbondo</strong>, yang mencerminkan semangat kedaerahan, kreativitas, dan kebanggaan terhadap tanah kelahiran.</p>
-
-          <p><strong>ZBOND</strong> dikelola di bawah naungan <strong>PT. ZBOND DIGITAL GROUP</strong>, sebuah badan hukum resmi berbentuk Perseroan Perorangan <strong>(UMKM)</strong> yang telah memiliki perizinan sah dari pemerintah. Platform ini hadir sebagai fasilitas digital untuk mendukung pertumbuhan ekonomi lokal dan meningkatkan kesejahteraan masyarakat Situbondo.</p>
-          
-          <p><strong>Layanan Utama ZBOND</strong></p>
-          <p>1. <strong>Layanan Ojek dan Kurir Digital</strong><br>
-          Memberi kemudahan akses transportasi dan pengiriman barang dalam wilayah Situbondo melalui aplikasi.</p>
-
-          <p>2. <strong>Pemasaran Produk Lokal (Merchant)</strong><br>
-          Membantu UMKM memasarkan produknya secara online dengan jangkauan lebih luas dan profesional.</p>
-
-          <p>3. <strong>Promosi dan Informasi Daerah</strong><br>
-          Menjadi media informasi kegiatan lokal, promosi wisata, dan potensi Situbondo.</p>
-
-          <p>4. <strong>Jasa Digital dan Peluang Usaha</strong><br>
-          Menyediakan ruang usaha digital seperti desain, publikasi, hingga layanan pendukung promosi.</p>
-
-          <p><strong>Dampak Sosial dan Ekonomi</strong></p>
-          <p>- Membuka peluang penghasilan bagi masyarakat melalui sistem kemitraan, seperti mitra driver, mitra merchant, dan mitra promosi.</p>
-          <p>- Memberikan fasilitas digital untuk mendukung aktivitas ekonomi masyarakat, tanpa memposisikan ZBOND sebagai pemberi kerja atau penyedia gaji.</p>
-          <p>- Mendorong pelaku UMKM agar lebih siap menghadapi tantangan digital dan memperluas pasarnya.</p>
-          <p>- Meningkatkan literasi digital di kalangan generasi muda dan pelaku usaha lokal.</p>
-          <p>- Menjadi jembatan kolaborasi antar komunitas dan pelaku ekonomi di Situbondo.</p>
-
-          <p><strong>Tujuan Besar ZBOND</strong></p>
-          <p>ZBOND hadir bukan semata-mata sebagai aplikasi komersial, tetapi sebagai gerakan anak muda Situbondo yang ingin melihat daerahnya maju secara digital, berdaya saing, dan mandiri secara ekonomi. Dengan mengedepankan kolaborasi, semangat lokal, dan teknologi, ZBOND diharapkan menjadi simbol kemajuan Situbondo masa kini dan masa depan.</p>
-        </div>
-      </div>  
-      
-      <button class="accordion">
-        <span>VISI DAN MISI</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>  
-      <div class="panel">
-        <div class="panel-content">
-          <p><strong>VISI ZBOND:</strong><br>Menjadi platform digital komunitas yang memperkuat konektivitas, transparansi layanan desa, dan pemberdayaan UMKM di Kota Tapal Kuda melalui teknologi yang inklusif, kreatif, dan membuka peluang kerja baru bagi masyarakat.</p>
-          <p><strong>MISI ZBOND:</strong></p>  
-          <ol>  
-            <li><strong>Mendorong Digitalisasi Desa:</strong> Menghadirkan layanan informasi desa yang cepat, terbuka, dan mudah diakses oleh masyarakat melalui platform digital.</li>  
-            <li><strong>Mendukung UMKM Lokal:</strong> Memberikan ruang promosi dan jejaring online bagi pelaku UMKM Situbondo untuk meningkatkan daya saing dan jangkauan pasar.</li>  
-            <li><strong>Membangun Literasi Digital:</strong> Mengedukasi masyarakat tentang pentingnya teknologi dalam kehidupan sehari-hari, terutama untuk usaha, administrasi, dan komunikasi.</li>  
-            <li><strong>Menghubungkan Komunitas:</strong> Menjadi jembatan antarwarga, komunitas, dan pemangku kepentingan dalam mewujudkan Situbondo yang lebih terintegrasi dan partisipatif.</li>  
-            <li><strong>Menumbuhkan Semangat Anak Muda:</strong> Mewadahi kreativitas, inovasi, dan semangat kepemudaan dalam membangun daerah melalui pendekatan kolaboratif dan berbasis teknologi.</li>
-            <li><strong>Mengurangi Pengangguran melalui Lapangan Kerja Baru:</strong> Membuka peluang kerja melalui program Driver ZBOND, yang memberdayakan pemuda dan warga lokal menjadi bagian dari layanan transportasi berbasis komunitas.</li>  
-          </ol>
-        </div>
-      </div>  
-      
-      <button class="accordion">
-        <span>STRUKTUR ORGANISASI</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>  
-      <div class="panel">
-        <div class="panel-content">
-          <p><strong>Struktur ZBOND:</strong></p>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
-            <div>
-              <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjni-pGpVqaaK6NMOEPnaYgbs8xSifO2cQiir9jy5ysBdTVRravnVlZKylHUkr0JoZ4xUXl-U8pTMcpigxI2oRvWdaTBAqqyuVdLguQSlMEiL_u9XpKMkOZ1OeY4b6rute_Wo8hmUMW_GsynySCn-Lryc7oaDFzVZJXv-4q6VPtXJmdNLrWgnuYGPnXow/s1000/1000217234.png" alt="Legalitas"> 
-              <p><strong>FOUNDER :</strong> ANNESA CINTA<br>  
-              <strong>CEO :</strong> ANDREAS EKO<br>  
-              <strong>ADMIN :</strong> ZHAINUL ARIFIN<br>
-              <strong>SUPERVISOR :</strong> EKO ARI IRAWAN <br>
-              <strong>LEADER :</strong> HERMANTO <br></p>
-            </div>
-          </div>
-        </div>
-      </div>  
-      
-      <button class="accordion">
-        <span>KANTOR KAMI</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>  
-      <div class="panel">
-        <div class="panel-content">
-          <p><strong>Alamat:</strong><br>PT. ZBOND DIGITAL GROUP<br> Perum Taman Permata Indah Blok C5</p>  
-          <p><strong>Email:</strong><br>zbondgiditalgroup@gmail.com</p>  
-          <p><strong>Whatsapp:</strong><br>+6283186727167</p>  
-          <p><strong>Website:</strong><br>zbond.online</p>
-        </div>
-      </div>  
-      
-      <button class="accordion">
-        <span>LEGALITAS</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>  
-      <div class="panel">
-        <div class="panel-content">
-          <p><strong>PT. ZBOND DIGITAL GROUP</strong></p>
-          <p><strong>SK Kemenkumham:</strong> AHU-038205.AH.01.30.Tahun 2025</p>
-          <p><strong>Tanggal Pendirian:</strong> 21 Juli 2025</p>
-        </div>
-      </div>  
-      
-      <button class="accordion">
-        <span>KEBIJAKAN PRIVASI</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>  
-      <div class="panel">
-        <div class="panel-content">
-          <p>Kebijakan privasi kami melindungi informasi pribadi Anda. Untuk informasi lebih lanjut, silakan kunjungi halaman kebijakan privasi kami.</p>
-          <a href="privacy.html" style="display: inline-block; margin-top: 15px; padding: 10px 20px; background: var(--primary-color); color: white; text-decoration: none; border-radius: 5px;">Baca Kebijakan Privasi</a>
-        </div>
-      </div>  
-    </div>
-
-    <div class="video-container">
-      <div class="video-wrapper">
-        <iframe id="ytplayer" width="300" height="533" 
-          src="https://www.youtube.com/embed/si63NSFyTlA?autoplay=1&mute=1&loop=1&playlist=si63NSFyTlA&controls=0&modestbranding=1&rel=0&playsinline=1" 
-          frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
-      </div>
-      <br>
-      <button class="mute-toggle" onclick="toggleMute()">🔇 Mute / Unmute</button>
-    </div>
-
-    <div class="download-section">
-  <a href="https://play.google.com/store/apps/details?id=com.myZbond.Zbond" target="_blank">
-    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFWxEa-mmczm0Mbg2iXiP_JjtQJo5pziVQCdpVu5yHzy3YQN-gjDcIh9ulixDSN_ibQvO_EDrky6giFR77U1KzzhfmbwewQvcr3k0Dv8bWQNODtPDx4LHNFAuDiO92Itym4ISi5b-yU9qrMOloj0hjlGOMwuuOwAGUS789i3GVmx7R8C-E-IoScBhk-A/s2560/1000077656.png" 
-         alt="Download Aplikasi ZBOND" style="max-width:250px; height:auto;">
-  </a>
-  <p style="margin-top: 10px;">Klik Tombol Playstore Di Atas</p>
-</div>
-  </main>
-
-  <footer>    
-    <p>&copy; 2025 PT. ZBOND DIGITAL GROUP</p>
-  </footer>  
-
-  <!-- Tombol Pengaduan Mengambang -->
-  <a href="https://wa.me/6283186727167?text=Halo%2C%20saya%20ingin%20mengajukan%20pengaduan%20terkait%20layanan." 
-     class="btn-pengaduan-floating" target="_blank" aria-label="Pengaduan via WhatsApp">
-    <img src="https://img.icons8.com/color/48/customer-support.png" alt="CS Icon">
-  </a>
-
-  <script>  
-    document.addEventListener('DOMContentLoaded', function() {
-      // Accordion functionality
-      const acc = document.querySelectorAll(".accordion");  
-      acc.forEach(item => {  
-        item.addEventListener("click", function() {  
-          this.classList.toggle("active");  
-          const panel = this.nextElementSibling;  
-          if (panel.style.maxHeight) {  
-            panel.style.maxHeight = null;  
-          } else {  
-            panel.style.maxHeight = panel.scrollHeight + "px";  
-          } 
-          
-          // Close other open panels
-          acc.forEach(otherItem => {
-            if (otherItem !== this) {
-              otherItem.classList.remove("active");
-              otherItem.nextElementSibling.style.maxHeight = null;
-            }
-          });
-        });  
-      });  
-      
-      // Open first accordion by default
-      if (acc.length > 0) {
-        acc[0].click();
-      }
-      
-      // Date and time function
-      function updateDateTime() {  
-        const now = new Date();  
-        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];  
-        const day = days[now.getDay()];  
-        const date = now.toLocaleDateString("id-ID", {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        });  
-        const time = now.toLocaleTimeString("id-ID", { 
-          hour: '2-digit', 
-          minute: '2-digit', 
-          second: '2-digit' 
-        });  
-        document.getElementById("dateTime").textContent = `${day}, ${date} ${time}`;  
-      }  
-      
-      setInterval(updateDateTime, 1000);  
-      updateDateTime();  
-      
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
-    });
-    
-    function toggleMute() {
-      const iframe = document.getElementById("ytplayer");
-      const isMuted = iframe.src.includes("mute=1");
-      iframe.src = iframe.src.replace(/mute=\d/, `mute=${isMuted ? 0 : 1}`);
+    /* Testimoni Banner Slider */
+    .testi-banner {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      border: 1px solid rgba(184,115,51,0.4);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.7), 0 0 15px rgba(255,23,68,0.2);
+      padding: 8px 12px;
+      min-height: 46px;
     }
-  </script>  
-
-  <style>
-    .btn-pengaduan-floating {
-      position: fixed;
-      bottom: 100px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(145deg, var(--primary-color), var(--primary-light));
+    .testi-banner::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(184,115,51,0.08) 0%, transparent 50%, rgba(255,23,68,0.06) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .testi-track {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+      position: relative;
+      z-index: 1;
+    }
+    .testi-slide {
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 1px 2px;
+    }
+    .testi-slide-avatar {
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(184,115,51,0.6);
+      box-shadow: 0 0 10px rgba(184,115,51,0.35);
+      filter: blur(2px);
+    }
+    .testi-slide-text {
+      font-size: 0.65rem;
+      color: #ccc;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 1px;
+    }
+    .testi-slide-name {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: #B87333;
+    }
+    .testi-slide-country {
+      font-size: 0.5rem;
+      color: #777;
+    }
+    .testi-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+      margin-top: 6px;
+      position: relative;
+      z-index: 1;
+    }
+    .testi-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .testi-dot.active {
+      background: #FF1744;
+      box-shadow: 0 0 8px #FF1744;
+      width: 16px;
+      border-radius: 8px;
+    }
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: #22c55e;
+      font-size: 0.48rem;
+      font-weight: 700;
+      padding: 1px 5px;
+      border-radius: 8px;
+      letter-spacing: 0.3px;
+    }
+    .live-badge .live-dot {
+      width: 4px;
+      height: 4px;
+      background: #22c55e;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+      box-shadow: 0 0 4px #22c55e;
+    }
+
+    /* Steps slider - Green LED */
+    .steps-slider {
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      border: 1px solid rgba(192,192,192,0.15);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.7);
+      padding: 14px 10px;
+      min-height: 80px;
+    }
+    .steps-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .steps-slide {
+      flex: 0 0 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 8px;
+    }
+    .steps-number-circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #14532d, #052e16);
+      border: 2px solid #22c55e;
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 9999;
-      text-decoration: none;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      font-size: 1rem;
+      font-weight: 800;
+      color: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 15px rgba(34,197,94,0.4), inset 0 0 8px rgba(34,197,94,0.1);
+      animation: stepGlowGreen 2s infinite;
     }
-    .btn-pengaduan-floating:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.35);
+    @keyframes stepGlowGreen {
+      0%, 100% { box-shadow: 0 0 10px rgba(34,197,94,0.3), inset 0 0 5px rgba(34,197,94,0.05); }
+      50% { box-shadow: 0 0 25px rgba(34,197,94,0.7), inset 0 0 12px rgba(34,197,94,0.2); }
     }
-    .btn-pengaduan-floating img {
-      width: 32px;
-      height: 32px;
+    .steps-slide-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #E8E8E8;
+      margin-bottom: 2px;
+    }
+    .steps-slide-desc {
+      font-size: 0.6rem;
+      color: #999;
+      line-height: 1.3;
+    }
+    .steps-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .steps-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      transition: all 0.4s ease;
+      cursor: pointer;
+    }
+    .steps-dot.active {
+      background: #22c55e;
+      box-shadow: 0 0 10px #22c55e;
+      width: 22px;
+      border-radius: 10px;
+    }
+    .steps-dot.done {
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+    }
+
+    /* Why chips - LED Blue */
+    .why-chip {
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      border: 1px solid rgba(192,192,192,0.15);
+      border-radius: 14px;
+      padding: 6px 10px;
+      font-size: 0.6rem;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+      transition: all 0.3s;
+    }
+    .why-chip:hover {
+      border-color: rgba(59,130,246,0.5);
+      box-shadow: 0 0 14px rgba(59,130,246,0.3);
+    }
+    .why-chip .check-led {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #3b82f6, #1d4ed8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.5rem;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 0 10px rgba(59,130,246,0.6), 0 0 20px rgba(59,130,246,0.3);
+      animation: ledGlowBlue 1.5s infinite;
+    }
+    @keyframes ledGlowBlue {
+      0%, 100% { box-shadow: 0 0 6px rgba(59,130,246,0.5), 0 0 15px rgba(59,130,246,0.2); }
+      50% { box-shadow: 0 0 14px rgba(59,130,246,0.9), 0 0 30px rgba(59,130,246,0.5); }
+    }
+
+    /* Contact click count - Green LED */
+    .click-count-led {
+      font-size: 0.55rem;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-weight: 600;
+      color: #22c55e;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      box-shadow: 0 0 8px rgba(34,197,94,0.3);
+      animation: clickGlow 2s infinite;
+    }
+    @keyframes clickGlow {
+      0%, 100% { box-shadow: 0 0 6px rgba(34,197,94,0.3); }
+      50% { box-shadow: 0 0 14px rgba(34,197,94,0.7); }
+    }
+
+    /* Toast */
+    .toast-container {
+      position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 40;
+      display: flex; flex-direction: column; gap: 5px; max-width: 380px; width: 90%; pointer-events: none;
+    }
+    .toast {
+      background: linear-gradient(145deg, #1a1a1a, #111);
+      border: 1px solid rgba(192,192,192,0.2); border-left: 3px solid #22c55e;
+      border-radius: 8px; padding: 8px 12px; font-size: 0.62rem; color: #ccc;
+      display: flex; align-items: center; gap: 6px;
+      animation: slideIn 0.4s ease, fadeOut 0.4s ease 4.6s forwards;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .toast.wa { border-left-color: #25d366; }
+    .toast.payment { border-left-color: #B87333; }
+    .toast.purchase { border-left-color: #FF1744; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+
+    /* Modal */
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85); z-index: 30; align-items: center; justify-content: center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+      border: 1px solid rgba(192,192,192,0.3); border-radius: 14px; padding: 18px 14px;
+      max-width: 360px; width: 90%; max-height: 80vh; overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #B87333; border-radius: 3px; }
+
+    section { scroll-margin-top: 60px; padding: 10px 0; }
+
+    /* Info compact bar */
+    .info-compact {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      text-align: center;
+    }
+    .info-compact-item {
+      background: linear-gradient(145deg, #1e1e1e, #141414);
+      border: 1px solid rgba(192,192,192,0.12);
+      border-radius: 10px;
+      padding: 6px 4px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    }
+    .info-compact-label {
+      font-size: 0.5rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      margin-bottom: 1px;
+    }
+    .info-compact-value {
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #E8E8E8;
+    }
+    .info-compact-value.accent {
+      color: #FF1744;
+      text-shadow: 0 0 6px rgba(255,23,68,0.5);
+    }
+    .info-compact-value.green {
+      color: #22c55e;
     }
   </style>
-</body>  
+</head>
+<body>
+  <!-- Particles -->
+  <div class="particle" style="width:4px;height:4px;top:12%;left:8%;"></div>
+  <div class="particle" style="width:5px;height:5px;top:72%;left:82%;animation-delay:2s;"></div>
+  <div class="particle" style="width:3px;height:3px;top:40%;left:18%;animation-delay:4s;"></div>
+  <div class="particle" style="width:5px;height:5px;top:78%;left:48%;animation-delay:1s;"></div>
+  <div class="particle" style="width:3px;height:3px;top:22%;left:72%;animation-delay:3s;"></div>
+  <div class="particle" style="width:4px;height:4px;top:55%;left:90%;animation-delay:5s;"></div>
+  <div class="particle" style="width:4px;height:4px;top:85%;left:15%;animation-delay:6s;"></div>
+  <div class="particle" style="width:3px;height:3px;top:30%;left:60%;animation-delay:3.5s;"></div>
+
+  <main class="main-container">
+    <!-- HEADER -->
+    <div class="flex items-center justify-between py-2 -mx-1 px-1 mt-1">
+      <a href="#" class="flex items-center gap-2 text-decoration-none flex-shrink-0">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjFX7LhDpdAEag7MhFpYBArXAIw0Ew6i593-yNt7BRrl3EfYTVp129q5V7LMq7TCH9nOKy12lifBdyg25WM9jSnOvcehLNfZxXcrk-hjihdcj1xZdSJMJY1KEcGNGuiu56U_iIiaV5ntHzlWpa6N3m9GMuuXkSdj-wUnD16FiiUYgQLLG8MDYctkarSBn4/s1080/1000496007.jpg" alt="Logo" class="w-7 h-7 rounded-lg object-cover flex-shrink-0" style="border:1.5px solid #B87333;box-shadow:0 0 10px rgba(184,115,51,0.4);">
+        <span class="text-sm font-bold tracking-tight whitespace-nowrap" style="color:#E8E8E8;text-shadow:0 2px 4px rgba(0,0,0,0.8);">SHARIANG<span style="background:linear-gradient(180deg,#C5834A,#B87333,#8B4C1C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">DEV</span></span>
+      </a>
+      <div class="flex gap-1.5 items-center">
+        <div class="flex items-center rounded-full p-0.5 w-14 h-6 relative cursor-pointer" id="langToggle" style="background:linear-gradient(180deg,#3a3a3a,#1e1e1e);box-shadow:0 3px 8px rgba(0,0,0,0.7),inset 0 1px 2px rgba(255,255,255,0.2);border:1px solid #b87333;">
+          <div class="absolute inset-0 flex items-center justify-between px-1 text-[9px] font-bold tracking-wider z-10 pointer-events-none">
+            <span class="text-[#E8E8E8] drop-shadow-md">ID</span>
+            <span class="text-[#888] drop-shadow-md">EN</span>
+          </div>
+          <div class="w-5 h-5 rounded-full bg-gradient-to-b from-[#C0C0C0] to-[#6E6E6E] shadow-lg transition-all duration-300 transform z-20" id="langKnob" style="transform:translateX(0);"></div>
+        </div>
+        <button onclick="openPayment()" class="flex items-center gap-1 text-[#B87333] font-semibold text-[10px] px-2 py-1.5 rounded-lg cursor-pointer transition-all duration-200 steel-plate-light metal-press whitespace-nowrap">
+          <i class="fas fa-wallet"></i> <span data-key="pay_btn">Bayar</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- INFO COMPACT -->
+    <div class="info-compact">
+      <div class="info-compact-item">
+        <div class="info-compact-label"><i class="fas fa-clock" style="color:#B87333;"></i> <span data-key="info_indonesia">WIB</span></div>
+        <div class="info-compact-value" id="indonesiaTime">--:--:--</div>
+      </div>
+      <div class="info-compact-item">
+        <div class="info-compact-label"><span class="inline-block w-1.5 h-1.5 rounded-full mr-1" style="background:#22c55e;animation:pulse 1.5s infinite;box-shadow:0 0 4px #22c55e;"></span> <span data-key="online_now">Online</span></div>
+        <div class="info-compact-value green" id="onlineCount">127</div>
+      </div>
+      <div class="info-compact-item">
+        <div class="info-compact-label"><i class="fas fa-users" style="color:#B87333;"></i> <span data-key="total_visitor">Total</span></div>
+        <div class="info-compact-value accent" id="totalVisitor">8.4K</div>
+      </div>
+    </div>
+
+    <!-- Testimoni Banner Slider -->
+    <div class="testi-banner" id="testiBanner">
+      <div class="flex items-center gap-2 mb-1 relative z-10">
+        <span class="live-badge"><span class="live-dot"></span> LIVE</span>
+        <span class="text-[9px] text-[#B87333] font-semibold tracking-wide" data-key="testi_title">Testimoni Pelanggan</span>
+      </div>
+      <div class="testi-track" id="testiTrack"></div>
+      <div class="testi-indicators" id="testiDots"></div>
+    </div>
+
+    <!-- Logo Center -->
+    <div class="flex justify-center items-center">
+      <img 
+        src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgwD7OaY1lOhYvG-Dj4xpt0W2502Umsr_sLXpxgQhPclwFe8H8ZJ4otZh68TfBC9fK4esNN_eKqY4PwxZANNhOznTqgba3zYhzYaUnUL3Mz6kzsyYNQaycjZ2wsL-x5H89BipI7Mtv6Mn-_waxwVRswD_KDHM3Iec28K7Zpdmj2CnRaed2qOyznAHkL8yQ/s1512/1000510137.png" 
+        alt="Shariang Dev Logo"
+        class="w-44 max-w-[200px] h-auto logo-animate hover:scale-105 transition-transform duration-500"
+        style="filter:drop-shadow(0 8px 20px rgba(0,0,0,0.9)) drop-shadow(0 0 15px rgba(255,23,68,0.4));"
+      >
+    </div>
+
+    <!-- Tagline -->
+    <h1 class="text-center text-lg font-['Montserrat'] font-extrabold tracking-[0.1em] metal-text emboss -mt-2">
+      EXCELLENT SERVICES
+    </h1>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="text-center -mt-1">
+      <span class="inline-block px-3 py-1 rounded-full text-[10px] font-semibold mb-2" style="background:rgba(184,115,51,0.15);color:#B87333;border:1px solid rgba(184,115,51,0.3);" data-key="badge">Aman • Cepat • Terpercaya</span>
+      <h2 class="text-base font-['Montserrat'] font-extrabold leading-tight mb-1" style="color:#E8E8E8;text-shadow:0 2px 8px rgba(0,0,0,0.7);">
+        <span data-key="hero_title">Rekber & Digital Service</span>
+      </h2>
+      <p class="text-[10px] text-[#999] mb-2" data-key="hero_desc">Solusi transaksi dan jasa digital dalam satu tempat. Proses mudah, harga terjangkau, pelayanan ramah.</p>
+      <div class="flex gap-2 justify-center flex-wrap">
+        <a href="https://wa.me/6283852330333?text=Halo%20Shariang%20Dev%2C%20saya%20mau%20order%20jasa" target="_blank" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold text-[11px] transition-all duration-200 metal-press wa-pulse" style="background:linear-gradient(145deg,#FF1744,#c01030);color:#fff;border:1px solid rgba(255,23,68,0.5);text-shadow:0 1px 2px rgba(0,0,0,0.5);">
+          <i class="fab fa-whatsapp"></i> <span data-key="btn_wa">Hubungi via WA</span>
+        </a>
+        <a href="#layanan" class="inline-flex items-center gap-2 px-3 py-2 rounded-lg font-semibold text-[11px] transition-all duration-200" style="background:transparent;color:#B87333;border:1px solid rgba(184,115,51,0.4);">
+          <span data-key="btn_layanan">Lihat Layanan</span>
+        </a>
+      </div>
+      <div class="flex gap-2 justify-center mt-2 text-[9px] text-[#888] flex-wrap">
+        <div class="steel-plate-light rounded-lg px-2.5 py-1 text-center"><strong class="block text-xs" style="color:#FF1744;text-shadow:0 0 6px rgba(255,23,68,0.5);">12K+</strong> <span data-key="stat_transaksi">Transaksi</span></div>
+        <div class="steel-plate-light rounded-lg px-2.5 py-1 text-center"><strong class="block text-xs" style="color:#FF1744;text-shadow:0 0 6px rgba(255,23,68,0.5);">8.4K+</strong> <span data-key="stat_pelanggan">Pelanggan</span></div>
+        <div class="steel-plate-light rounded-lg px-2.5 py-1 text-center"><strong class="block text-xs" style="color:#FF1744;text-shadow:0 0 6px rgba(255,23,68,0.5);">2.1K+</strong> <span data-key="stat_testimoni">Testimoni</span></div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="layanan">
+      <h2 class="text-sm font-['Montserrat'] font-bold metal-text emboss mb-2" data-key="layanan_title">Layanan Kami</h2>
+      <div class="flex flex-col gap-2" id="servicesAccordion"></div>
+
+      <h2 class="text-sm font-['Montserrat'] font-bold metal-text emboss mb-2 mt-3" data-key="why_title">Kenapa Memilih Kami?</h2>
+      <div class="flex flex-wrap gap-1.5" id="whyRow"></div>
+
+      <h2 class="text-sm font-['Montserrat'] font-bold metal-text emboss mb-2 mt-3" data-key="steps_title">Cara Pemesanan</h2>
+      <div class="steps-slider" id="stepsSlider">
+        <div class="steps-track" id="stepsTrack"></div>
+        <div class="steps-indicators" id="stepsDots"></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="kontak">
+      <h2 class="text-sm font-['Montserrat'] font-bold metal-text emboss mb-2" data-key="kontak_title">Hubungi Kami</h2>
+      <div class="steel-plate rounded-2xl p-3">
+        <p class="text-[10px] text-[#888] mb-2" data-key="jam_operasional">🕐 Setiap Hari 08.00 - 22.00 WIB</p>
+        <div class="flex flex-col gap-1.5" id="contactButtons"></div>
+        <hr class="my-2" style="border-color:rgba(192,192,192,0.1);">
+        <p class="text-[10px] text-[#999] mb-1.5"><i class="fas fa-map-marker-alt" style="color:#B87333;"></i> <span data-key="alamat">Perum Taman Permata Indah, Panarukan - Jawa Timur</span></p>
+        <div class="rounded-xl overflow-hidden" style="border:1px solid rgba(192,192,192,0.15);box-shadow:0 4px 12px rgba(0,0,0,0.6);">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.5!2d113.938539!3d-7.701512!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zN8KwNDInMDUuNCJTIDExM8KwNTYnMTguNyJF!5e0!3m2!1sid!2sid!4v1690000000000" allowfullscreen="" loading="lazy" class="block w-full h-36 border-0"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center pb-3">
+      <div class="text-sm font-['Montserrat'] font-extrabold mb-0.5">
+        <span style="color:#E8E8E8;text-shadow:0 1px 3px rgba(0,0,0,0.6);">SHARIANG</span><span style="background:linear-gradient(180deg,#C5834A,#B87333,#8B4C1C);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">DEV</span>
+      </div>
+      <p class="text-[9px] tracking-widest text-[#5a5a5a] emboss font-semibold">© 2026 Shariang Dev</p>
+    </footer>
+  </main>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Payment Modal -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal">
+      <button class="float-right bg-transparent border-none text-white text-lg cursor-pointer" onclick="closePayment()">&times;</button>
+      <h3 class="text-base font-['Montserrat'] font-bold mb-2" style="color:#B87333;"><i class="fas fa-wallet"></i> <span data-key="pay_title">Pembayaran Resmi</span></h3>
+      <p class="text-[10px] text-[#999] mb-2" data-key="pay_desc">Silakan transfer ke salah satu rekening di bawah ini:</p>
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
+        <div class="text-[10px] text-[#ccc]"><strong>🌍 Binance (<span data-key="intl">Internasional</span>)</strong><br><code class="text-[11px]" style="color:#B87333;">483828402</code><br><small>Shariang Dev</small></div>
+        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('483828402')"><span data-key="copy_btn">📋 Salin</span></button>
+      </div>
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
+        <div class="text-[10px] text-[#ccc]"><strong>🇮🇩 BNI (<span data-key="local">Bank Negara Indonesia</span>)</strong><br><code class="text-[11px]" style="color:#B87333;">1942943720</code><br><small>Andreas Eko Darmawan</small></div>
+        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('1942943720')"><span data-key="copy_btn">📋 Salin</span></button>
+      </div>
+      <p class="text-[9px] text-center mt-2" style="color:#B87333;" data-key="pay_warning">⚠️ Setelah transfer, klik tombol di bawah untuk konfirmasi</p>
+      <a href="https://wa.me/6283852330333?text=Halo%20Shariang%20Dev%2C%20saya%20sudah%20melakukan%20pembayaran.%20Berikut%20bukti%20transfernya%3A" target="_blank" class="block w-full text-center py-2.5 rounded-xl font-bold text-xs mt-2 no-underline metal-press" style="background:linear-gradient(145deg,#25d366,#1da851);color:#fff;box-shadow:0 4px 12px rgba(37,211,102,0.3);" data-key="confirm_btn">📤 KONFIRMASI PEMBAYARAN</a>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      let currentLang = 'id';
+
+      const langData = {
+        id: {
+          badge:"Aman • Cepat • Terpercaya",hero_title:"Rekber & Digital Service",
+          hero_desc:"Solusi transaksi dan jasa digital dalam satu tempat. Proses mudah, harga terjangkau, pelayanan ramah.",
+          btn_wa:"Hubungi via WA",btn_layanan:"Lihat Layanan",layanan_title:"Layanan Kami",
+          why_title:"Kenapa Memilih Kami?",steps_title:"Cara Pemesanan",testi_title:"Testimoni Pelanggan",
+          kontak_title:"Hubungi Kami",jam_operasional:"🕐 Setiap Hari 08.00 - 22.00 WIB",
+          alamat:"Perum Taman Permata Indah, Panarukan - Jawa Timur",pay_title:"Pembayaran Resmi",
+          pay_btn:"Bayar",pay_desc:"Silakan transfer ke salah satu rekening di bawah ini:",
+          pay_warning:"⚠️ Setelah transfer, klik tombol di bawah untuk konfirmasi",
+          confirm_btn:"📤 KONFIRMASI PEMBAYARAN",copy_btn:"📋 Salin",
+          intl:"Internasional",local:"Bank Negara Indonesia",
+          info_indonesia:"WIB",online_now:"Online",total_visitor:"Total",
+          stat_transaksi:"Transaksi",stat_pelanggan:"Pelanggan",stat_testimoni:"Testimoni",
+          order_now:"Pesan Sekarang",
+          why:["Respon Cepat","Harga Terjangkau","Proses Transparan","Support Selesai","Seluruh Indonesia"],
+          steps: [
+            {num:"1",title:"Hubungi Admin",desc:"Hubungi admin via WhatsApp dan jelaskan kebutuhan Anda"},
+            {num:"2",title:"Jelaskan Kebutuhan",desc:"Jelaskan secara detail layanan yang Anda butuhkan"},
+            {num:"3",title:"Pembayaran",desc:"Lakukan pembayaran via Binance atau BNI"},
+            {num:"4",title:"Proses Pengerjaan",desc:"Kami proses pesanan Anda dengan cepat"},
+            {num:"5",title:"Selesai",desc:"Hasil dikirim dan Anda puas dengan layanan kami"}
+          ],
+          contacts:[
+            {icon:"fab fa-whatsapp",label:"WhatsApp",href:"https://wa.me/6283852330333?text=Halo%20Shariang%20Dev%2C%20saya%20mau%20order%20jasa",id:"wa"},
+            {icon:"fas fa-envelope",label:"Email",href:"mailto:theshariang@gmail.com",id:"email"},
+            {icon:"fab fa-facebook-f",label:"Facebook",href:"https://www.facebook.com/share/1Bfrm92of9/",id:"fb"},
+            {icon:"fab fa-telegram-plane",label:"Telegram Channel",href:"https://t.me/ShariangDevProof",id:"telegram"},
+            {icon:"fab fa-tiktok",label:"TikTok",href:"https://www.tiktok.com/@ndre_shariang?_r=1&_t=ZS-96w20sNdcOo",id:"tiktok"}
+          ]
+        },
+        en: {
+          badge:"Safe • Fast • Trusted",hero_title:"Escrow & Digital Service",
+          hero_desc:"One-stop digital transaction and service solution. Easy process, affordable prices, friendly service.",
+          btn_wa:"Contact via WA",btn_layanan:"View Services",layanan_title:"Our Services",
+          why_title:"Why Choose Us?",steps_title:"How to Order",testi_title:"Customer Testimonials",
+          kontak_title:"Contact Us",jam_operasional:"🕐 Daily 08:00 - 22:00 WIB",
+          alamat:"Perum Taman Permata Indah, Panarukan - East Java",pay_title:"Official Payment",
+          pay_btn:"Pay",pay_desc:"Please transfer to one of the accounts below:",
+          pay_warning:"⚠️ After transfer, click the button below to confirm",
+          confirm_btn:"📤 CONFIRM PAYMENT",copy_btn:"📋 Copy",
+          intl:"International",local:"Bank Negara Indonesia",
+          info_indonesia:"WIB",online_now:"Online",total_visitor:"Total",
+          stat_transaksi:"Transactions",stat_pelanggan:"Customers",stat_testimoni:"Testimonials",
+          order_now:"Order Now",
+          why:["Fast Response","Affordable","Transparent","Full Support","All Indonesia"],
+          steps: [
+            {num:"1",title:"Contact Admin",desc:"Contact admin via WhatsApp and explain your needs"},
+            {num:"2",title:"Explain Needs",desc:"Explain in detail the service you need"},
+            {num:"3",title:"Payment",desc:"Make payment via Binance or BNI"},
+            {num:"4",title:"Processing",desc:"We process your order quickly"},
+            {num:"5",title:"Done",desc:"Results delivered and you're satisfied"}
+          ],
+          contacts:[
+            {icon:"fab fa-whatsapp",label:"WhatsApp",href:"https://wa.me/6283852330333?text=Hello%20Shariang%20Dev%2C%20I%20want%20to%20order%20services",id:"wa"},
+            {icon:"fas fa-envelope",label:"Email",href:"mailto:theshariang@gmail.com",id:"email"},
+            {icon:"fab fa-facebook-f",label:"Facebook",href:"https://www.facebook.com/share/1Bfrm92of9/",id:"fb"},
+            {icon:"fab fa-telegram-plane",label:"Telegram Channel",href:"https://t.me/ShariangDevProof",id:"telegram"},
+            {icon:"fab fa-tiktok",label:"TikTok",href:"https://www.tiktok.com/@ndre_shariang?_r=1&_t=ZS-96w20sNdcOo",id:"tiktok"}
+          ]
+        }
+      };
+
+      const services = [
+        {id:'gpc',titleId:'Google Play Console Accounts',titleEn:'Google Play Console Accounts',descId:'Jual akun Google Play Console fresh & aged, siap upload aplikasi. Garansi login, full akses email.',descEn:'Sell Google Play Console accounts, fresh & aged, ready to publish apps. Login guarantee, full email access.',waMsgId:'Halo Shariang Dev, saya mau order Google Play Console Accounts',waMsgEn:'Hello Shariang Dev, I want to order Google Play Console Accounts'},
+        {id:'phone',titleId:'Indonesian Phone Numbers',titleEn:'Indonesian Phone Numbers',descId:'Jual nomor telepon Indonesia untuk verifikasi OTP. All operator, fast delivery.',descEn:'Sell Indonesian phone numbers for OTP verification. All operators, fast delivery.',waMsgId:'Halo Shariang Dev, saya mau order Indonesian Phone Numbers',waMsgEn:'Hello Shariang Dev, I want to order Indonesian Phone Numbers'},
+        {id:'sosmed',titleId:'Media Sosial Booster',titleEn:'Social Media Booster',descId:'Meningkatkan Suka, Tayangan/Penonton, Share, Pengikut (TikTok, YouTube, Facebook, Instagram). Real & aman.',descEn:'Boost Likes, Views, Shares, Followers (TikTok, YouTube, Facebook, Instagram). Real & safe.',waMsgId:'Halo Shariang Dev, saya mau order Media Sosial Booster',waMsgEn:'Hello Shariang Dev, I want to order Social Media Booster'},
+        {id:'appdev',titleId:'Pembuatan Aplikasi',titleEn:'App Development',descId:'Pembuatan aplikasi ojol, aplikasi laporan, aplikasi toko online, dan lain-lain untuk UMKM. Desain custom, mobile friendly.',descEn:'Development of ride-hailing apps, report apps, online store apps, and more for SMEs. Custom design, mobile friendly.',waMsgId:'Halo Shariang Dev, saya mau order Pembuatan Aplikasi',waMsgEn:'Hello Shariang Dev, I want to order App Development'},
+        {id:'appcontent',titleId:'App Content Services',titleEn:'App Content Services',descId:'Jasa pengisian konten aplikasi, review, rating, dan download. Real user, aman.',descEn:'App filling services, reviews, ratings, and installs. Real users, safe.',waMsgId:'Halo Shariang Dev, saya mau order App Content Services',waMsgEn:'Hello Shariang Dev, I want to order App Content Services'},
+        {id:'webdev',titleId:'Website Development',titleEn:'Website Development',descId:'Jasa pembuatan website company profile, landing page, toko online. Desain modern, mobile friendly.',descEn:'Website development for company profile, landing page, online store. Modern design, mobile friendly.',waMsgId:'Halo Shariang Dev, saya mau order Website Development',waMsgEn:'Hello Shariang Dev, I want to order Website Development'},
+        {id:'badanusaha',titleId:'Jasa Pendirian Badan Usaha 🇮🇩',titleEn:'Business Entity Establishment 🇮🇩 (Indonesia Only)',descId:'Pembuatan PT Perorangan, PT Umum, CV, UD, NPWP, dan Pembuatan NIB. Khusus Indonesia.',descEn:'Establishment of PT Perorangan, PT Umum, CV, UD, NPWP, and NIB creation. Indonesia only.',waMsgId:'Halo Shariang Dev, saya mau order Jasa Pendirian Badan Usaha',waMsgEn:'Hello Shariang Dev, I want to order Business Entity Establishment (Indonesia)'}
+      ];
+
+      const testimoniData = [
+        {img:"Andi+P",bg:"e11d48",flag:"🇮🇩",name:"Andi P******",country:"Indonesia",text:"Sangat membantu proses transaksi, rekber aman dan terpercaya!"},
+        {img:"Sarah+C",bg:"f59e0b",flag:"🇸🇬",name:"Sarah C***",country:"Singapore",text:"Got my Google Play Console account in minutes. Very professional!"},
+        {img:"Usman+K",bg:"065f46",flag:"🇵🇰",name:"Usman K*****",country:"Pakistan",text:"Indonesian phone numbers delivered super fast. Best service for OTP!"},
+        {img:"Hendra+W",bg:"0ea5e9",flag:"🇮🇩",name:"Hendra W*****",country:"Indonesia",text:"Aplikasi toko online untuk UMKM saya selesai tepat waktu. Fitur lengkap!"},
+        {img:"Michael+J",bg:"3b82f6",flag:"🇺🇸",name:"Michael J******",country:"USA",text:"Needed Indonesian numbers for OTP, got them instantly!"},
+        {img:"Dian+P",bg:"a855f7",flag:"🇮🇩",name:"Dian P******",country:"Indonesia",text:"Booster TikTok sangat membantu, views dan likes naik drastis!"},
+        {img:"Zhang+M",bg:"dc2626",flag:"🇨🇳",name:"Zhang M**",country:"China",text:"购买印尼手机号非常快，所有运营商都有！"},
+        {img:"Ahmad+F",bg:"047857",flag:"🇲🇾",name:"Ahmad F*****",country:"Malaysia",text:"Website company profile siap dalam 2 hari. Hasil memuaskan!"},
+        {img:"Siti+N",bg:"0891b2",flag:"🇮🇩",name:"Siti N*****",country:"Indonesia",text:"Aplikasi laporan keuangan untuk UMKM saya sangat membantu. Recommended!"},
+        {img:"Budi+S",bg:"15803d",flag:"🇮🇩",name:"Budi S******",country:"Indonesia",text:"Pembuatan PT Perorangan sangat cepat, NPWP dan NIB langsung jadi!"},
+        {img:"Emily+R",bg:"8b5cf6",flag:"🇺🇸",name:"Emily R********",country:"USA",text:"Fast OTP numbers. Works perfectly every time!"},
+        {img:"Rina+K",bg:"c026d3",flag:"🇮🇩",name:"Rina K******",country:"Indonesia",text:"Followers Instagram naik 5K dalam seminggu. Recommended!"},
+        {img:"Fatima+A",bg:"10b981",flag:"🇵🇰",name:"Fatima A****",country:"Pakistan",text:"OTP ke liye Indonesian numbers foran deliver hue!"},
+        {img:"Li+W",bg:"b91c1c",flag:"🇨🇳",name:"Li W**",country:"China",text:"Google Play控制台账户非常可靠，强烈推荐！"},
+        {img:"Sari+D",bg:"be123c",flag:"🇮🇩",name:"Sari D***",country:"Indonesia",text:"Dibantu sampai selesai ngurus konten aplikasi."},
+        {img:"Melissa+T",bg:"d97706",flag:"🇲🇾",name:"Melissa T**",country:"Malaysia",text:"Website toko online selesai tepat waktu!"},
+        {img:"Rizky+P",bg:"eab308",flag:"🇮🇩",name:"Rizky P******",country:"Indonesia",text:"Akun GPC aged langsung bisa dipakai. Mantap!"},
+        {img:"Dewi+L",bg:"7c3aed",flag:"🇮🇩",name:"Dewi L******",country:"Indonesia",text:"Pendirian CV dibantu full. NPWP dan NIB beres!"}
+      ];
+
+      const clickCounts = { wa:1847, email:923, fb:1456, telegram:2103, tiktok:1678 };
+      let currentTesti = 0;
+      let currentStep = 0;
+      let testiInterval;
+      let stepsInterval;
+
+      function initTestiBanner() {
+        const track = document.getElementById('testiTrack');
+        const dots = document.getElementById('testiDots');
+        track.innerHTML = testimoniData.map(t => `
+          <div class="testi-slide">
+            <img src="https://ui-avatars.com/api/?name=${t.img}&background=${t.bg}&color=fff&size=80&bold=true&font-size=0.35" alt="${t.name}" class="testi-slide-avatar">
+            <div class="flex-1 min-w-0">
+              <p class="testi-slide-text">"${t.text}"</p>
+              <span class="testi-slide-name">${t.flag} ${t.name}</span> <span class="testi-slide-country">• ${t.country}</span>
+            </div>
+          </div>
+        `).join('');
+        dots.innerHTML = testimoniData.map((_,i) => `<div class="testi-dot ${i===0?'active':''}" data-index="${i}"></div>`).join('');
+        dots.querySelectorAll('.testi-dot').forEach(dot => {
+          dot.addEventListener('click',function(){
+            goToSlide(parseInt(this.getAttribute('data-index')));
+            resetTestiInterval();
+          });
+        });
+        goToSlide(0);
+        startTestiInterval();
+      }
+
+      function goToSlide(index) {
+        currentTesti = index;
+        document.getElementById('testiTrack').style.transform = `translateX(-${index*100}%)`;
+        document.querySelectorAll('.testi-dot').forEach((dot,i) => dot.classList.toggle('active',i===index));
+      }
+      function nextSlide() { currentTesti = (currentTesti+1)%testimoniData.length; goToSlide(currentTesti); }
+      function startTestiInterval() { testiInterval = setInterval(nextSlide,3000); }
+      function resetTestiInterval() { clearInterval(testiInterval); startTestiInterval(); }
+
+      function initStepsSlider() {
+        const data = langData[currentLang];
+        const track = document.getElementById('stepsTrack');
+        const dots = document.getElementById('stepsDots');
+        track.innerHTML = data.steps.map(s => `
+          <div class="steps-slide">
+            <div class="steps-number-circle">${s.num}</div>
+            <div>
+              <div class="steps-slide-title">${s.title}</div>
+              <div class="steps-slide-desc">${s.desc}</div>
+            </div>
+          </div>
+        `).join('');
+        dots.innerHTML = data.steps.map((_,i) => `<div class="steps-dot ${i===0?'active':''}" data-index="${i}"></div>`).join('');
+        dots.querySelectorAll('.steps-dot').forEach(dot => {
+          dot.addEventListener('click',function(){
+            currentStep = parseInt(this.getAttribute('data-index'));
+            goToStep(currentStep);
+            resetStepsInterval();
+          });
+        });
+        currentStep = 0;
+        goToStep(0);
+        startStepsInterval();
+      }
+
+      function goToStep(index) {
+        currentStep = index;
+        document.getElementById('stepsTrack').style.transform = `translateX(-${index*100}%)`;
+        document.querySelectorAll('.steps-dot').forEach((dot,i) => {
+          dot.classList.remove('active','done');
+          if(i === index) dot.classList.add('active');
+          if(i < index) dot.classList.add('done');
+        });
+      }
+      function nextStep() {
+        currentStep = (currentStep+1) % langData[currentLang].steps.length;
+        goToStep(currentStep);
+      }
+      function startStepsInterval() { stepsInterval = setInterval(nextStep,2500); }
+      function resetStepsInterval() { clearInterval(stepsInterval); startStepsInterval(); }
+
+      function showToast(message,type='') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast '+type;
+        toast.innerHTML = `<span style="width:5px;height:5px;background:#22c55e;border-radius:50%;animation:pulse 1.5s infinite;"></span> ${message}`;
+        container.appendChild(toast);
+        setTimeout(()=>{if(toast.parentNode)toast.parentNode.removeChild(toast);},5000);
+      }
+
+      function updateLanguage(lang) {
+        currentLang = lang;
+        const data = langData[lang];
+        document.querySelectorAll('[data-key]').forEach(el => {
+          const key = el.getAttribute('data-key');
+          if(data[key]) el.textContent = data[key];
+        });
+        document.querySelectorAll('.service-accordion-card').forEach((card,index) => {
+          if(index < services.length) {
+            const s = services[index];
+            const titleEl = card.querySelector('.service-title');
+            const descEl = card.querySelector('.service-desc');
+            const btn = card.querySelector('.order-btn');
+            if(titleEl) titleEl.textContent = lang==='id'?s.titleId:s.titleEn;
+            if(descEl) descEl.textContent = lang==='id'?s.descId:s.descEn;
+            if(btn) {
+              const msg = lang==='id'?s.waMsgId:s.waMsgEn;
+              btn.setAttribute('data-wa-message',msg);
+              btn.querySelector('span').textContent = data.order_now || (lang==='id'?'Pesan Sekarang':'Order Now');
+            }
+          }
+        });
+        
+        document.getElementById('whyRow').innerHTML = data.why.map(w => 
+          `<span class="why-chip"><span class="check-led"><i class="fas fa-check"></i></span>${w}</span>`
+        ).join('');
+        
+        document.getElementById('contactButtons').innerHTML = data.contacts.map(c => {
+          const count = clickCounts[c.id]||0;
+          return `<a href="${c.href}" target="_blank" class="flex items-center justify-between gap-2 px-2.5 py-2.5 rounded-xl text-decoration-none font-semibold text-[11px] text-[#E8E8E8] steel-plate-light metal-press" onclick="handleContactClick('${c.id}')"><span class="flex items-center gap-2"><i class="${c.icon}"></i> ${c.label}</span><span class="click-count-led" id="count_${c.id}">👥 ${count.toLocaleString()}</span></a>`;
+        }).join('');
+
+        initStepsSlider();
+      }
+
+      function renderAccordion() {
+        const container = document.getElementById('servicesAccordion');
+        const data = langData[currentLang];
+        container.innerHTML = '';
+        services.forEach((service,idx) => {
+          const card = document.createElement('div');
+          card.className = 'service-accordion-card steel-plate rounded-2xl p-0.5 card-3d transition-all duration-300';
+          card.innerHTML = `<div class="rounded-2xl p-2.5 flex flex-col" style="background:#0d0d0d;">
+            <div class="flex justify-between items-center cursor-pointer accordion-header" data-target="acc-content-${idx}">
+              <h3 class="service-title font-['Montserrat'] font-bold text-xs text-[#E8E8E8] tracking-wide drop-shadow-md">${currentLang==='id'?service.titleId:service.titleEn}</h3>
+              <span class="text-lg rotate-icon transition-transform duration-300" style="color:#B87333;" id="acc-icon-${idx}">▶</span>
+            </div>
+            <div class="accordion-content text-[10px] text-[#B0B0B0] leading-relaxed" id="acc-content-${idx}">
+              <p class="service-desc mb-2">${currentLang==='id'?service.descId:service.descEn}</p>
+              <button class="order-btn w-full py-2 rounded-xl text-white tracking-wider shadow-lg metal-press flex items-center justify-center transition-all text-[11px] danger-pulse"
+                data-wa-message="${currentLang==='id'?service.waMsgId:service.waMsgEn}">
+                <span>${data.order_now || (currentLang==='id'?'Pesan Sekarang':'Order Now')}</span>
+              </button>
+            </div>
+          </div>`;
+          container.appendChild(card);
+        });
+        document.querySelectorAll('.accordion-header').forEach(header => {
+          header.addEventListener('click',function(){
+            const targetId = this.getAttribute('data-target');
+            const content = document.getElementById(targetId);
+            const icon = document.getElementById('acc-icon-'+targetId.split('-')[2]);
+            if(!content||!icon) return;
+            document.querySelectorAll('.accordion-content').forEach(c => {
+              if(c.id!==targetId && c.classList.contains('open')) {
+                c.classList.remove('open');
+                const oi = document.getElementById('acc-icon-'+c.id.split('-')[2]);
+                if(oi) oi.classList.remove('open');
+              }
+            });
+            content.classList.toggle('open');
+            icon.classList.toggle('open');
+          });
+        });
+        document.querySelectorAll('.order-btn').forEach(btn => {
+          btn.addEventListener('click',function(e){
+            e.stopPropagation();
+            const msg = this.getAttribute('data-wa-message')||'Halo Shariang Dev';
+            window.open(`https://wa.me/6283852330333?text=${encodeURIComponent(msg)}`,'_blank');
+            showToast('📤 Membuka WhatsApp...','wa');
+          });
+        });
+      }
+
+      document.getElementById('langToggle').addEventListener('click',()=>{
+        const knob = document.getElementById('langKnob');
+        if(currentLang==='id') {
+          knob.style.transform = 'translateX(1.3rem)';
+          updateLanguage('en');
+          showToast('Language: English 🇬🇧','payment');
+        } else {
+          knob.style.transform = 'translateX(0)';
+          updateLanguage('id');
+          showToast('Bahasa: Indonesia 🇮🇩','payment');
+        }
+        renderAccordion();
+      });
+
+      window.handleContactClick = function(id) {
+        clickCounts[id] = (clickCounts[id]||0)+1;
+        const el = document.getElementById('count_'+id);
+        if(el) {
+          el.textContent = '👥 '+clickCounts[id].toLocaleString();
+          el.style.transform = 'scale(1.2)';
+          setTimeout(()=>{el.style.transform='scale(1)';},300);
+        }
+      };
+
+      window.openPayment = function() {
+        document.querySelectorAll('#paymentModal [data-key]').forEach(el => {
+          const key = el.getAttribute('data-key');
+          if(langData[currentLang][key]) el.textContent = langData[currentLang][key];
+        });
+        document.getElementById('paymentModal').classList.add('show');
+      };
+      window.closePayment = function() { document.getElementById('paymentModal').classList.remove('show'); };
+      window.copyText = function(text) {
+        navigator.clipboard.writeText(text).then(()=>{
+          showToast('✅ '+(currentLang==='id'?'Nomor berhasil disalin!':'Number copied!'),'payment');
+        });
+      };
+
+      function updateTime() {
+        const now = new Date();
+        const wib = new Date(now.toLocaleString('en-US',{timeZone:'Asia/Jakarta'}));
+        document.getElementById('indonesiaTime').textContent = wib.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+      }
+      setInterval(updateTime,1000);updateTime();
+
+      function updateVisitors() {
+        document.getElementById('onlineCount').textContent = 100+Math.floor(Math.random()*60)-10;
+        const newTotal = 8450+Math.floor(Math.random()*20)+Math.floor(Date.now()/100000)%100;
+        document.getElementById('totalVisitor').textContent = (newTotal/1000).toFixed(1)+'K';
+      }
+      setInterval(updateVisitors,8000);updateVisitors();
+
+      function updateClickCounts() {
+        Object.keys(clickCounts).forEach(id => {
+          clickCounts[id] += Math.floor(Math.random()*3);
+          const el = document.getElementById('count_'+id);
+          if(el) el.textContent = '👥 '+clickCounts[id].toLocaleString();
+        });
+      }
+      setInterval(updateClickCounts,15000);
+
+      function randomToast() {
+        const items = [
+          {flag:"🇵🇰",city:"Karachi",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇺🇸",city:"New York",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇨🇳",city:"Shanghai",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇮🇩",city:"Jakarta",msg:"baru saja order Jasa Pendirian Badan Usaha"},
+          {flag:"🇮🇩",city:"Bandung",msg:"baru saja order Media Sosial Booster"},
+          {flag:"🇮🇩",city:"Surabaya",msg:"baru saja order Pembuatan Aplikasi"},
+          {flag:"🇸🇬",city:"Singapore",msg:"is browsing services"},
+          {flag:"🇲🇾",city:"Kuala Lumpur",msg:"is browsing services"},
+        ];
+        const item = items[Math.floor(Math.random()*items.length)];
+        const mins = Math.floor(Math.random()*8)+1;
+        showToast(`📱 ${item.flag} Someone from ${item.city} ${item.msg} • ${mins}m ago`,'purchase');
+        setTimeout(randomToast,Math.floor(Math.random()*6000)+4000);
+      }
+      setTimeout(randomToast,3000);
+
+      function randomPaymentToast() {
+        if(Math.random()>0.5) {
+          const c = [{flag:"🇵🇰",city:"Islamabad"},{flag:"🇨🇳",city:"Shenzhen"},{flag:"🇺🇸",city:"Chicago"}][Math.floor(Math.random()*3)];
+          showToast(`💰 ${c.flag} Payment $${Math.floor(Math.random()*500)+100} via Binance confirmed!`,'payment');
+        } else {
+          showToast(`💰 🇮🇩 Pembayaran Rp ${(Math.floor(Math.random()*3000001)+300000).toLocaleString('id-ID')} via BNI dikonfirmasi!`,'payment');
+        }
+        setTimeout(randomPaymentToast,Math.floor(Math.random()*12000)+8000);
+      }
+      setTimeout(randomPaymentToast,5000);
+
+      document.addEventListener('click',function(e){
+        if(e.target===document.getElementById('paymentModal')) closePayment();
+      });
+
+      updateLanguage('id');
+      renderAccordion();
+      initTestiBanner();
+    })();
+  </script>
+</body>
 </html>
