@@ -115,7 +115,7 @@
     .proof-link { display: flex; align-items: center; justify-content: center; gap: 4px; font-size: 0.5rem; color: #0088cc; text-decoration: none; margin-top: 2px; font-weight: 600; }
     .proof-badge { display: inline-flex; align-items: center; gap: 3px; background: rgba(0,136,204,0.15); border: 1px solid rgba(0,136,204,0.3); color: #0088cc; font-size: 0.45rem; font-weight: 700; padding: 1px 5px; border-radius: 8px; }
     .proof-loading { text-align: center; padding: 20px; color: #888; font-size: 0.65rem; }
-    .proof-empty { text-align: center; padding: 20px; color: #FF1744; font-size: 0.6rem; }
+    .proof-empty { text-align: center; padding: 20px; color: #FF1744; font-size: 0.6rem; display: none; }
 
     .steps-slider { position: relative; overflow: hidden; border-radius: 14px; background: linear-gradient(145deg, #1a1a1a, #0f0f0f); border: 1px solid rgba(192,192,192,0.15); box-shadow: 0 6px 18px rgba(0,0,0,0.7); padding: 14px 10px; min-height: 80px; }
     .steps-track { display: flex; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); will-change: transform; }
@@ -136,10 +136,12 @@
     .click-count-led { font-size: 0.55rem; padding: 3px 8px; border-radius: 10px; font-weight: 600; color: #22c55e; background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); box-shadow: 0 0 8px rgba(34,197,94,0.3); animation: clickGlow 2s infinite; }
     @keyframes clickGlow { 0%, 100% { box-shadow: 0 0 6px rgba(34,197,94,0.3); } 50% { box-shadow: 0 0 14px rgba(34,197,94,0.7); } }
 
-    .toast-container { position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 40; display: flex; flex-direction: column; gap: 5px; max-width: 380px; width: 90%; pointer-events: none; }
-    .toast { background: linear-gradient(145deg, #1a1a1a, #111); border: 1px solid rgba(192,192,192,0.2); border-left: 3px solid #22c55e; border-radius: 8px; padding: 8px 12px; font-size: 0.62rem; color: #ccc; display: flex; align-items: center; gap: 6px; animation: slideIn 0.4s ease, fadeOut 0.4s ease 4.6s forwards; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-    @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-10px); } }
+    .toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; display: flex; flex-direction: column; gap: 8px; max-width: 380px; width: 90%; pointer-events: none; }
+    .toast { background: #22c55e; color: #fff; border-radius: 12px; padding: 12px 16px; font-size: 0.65rem; font-weight: 600; display: flex; align-items: center; gap: 8px; animation: toastIn 0.3s ease; box-shadow: 0 8px 25px rgba(34,197,94,0.4); pointer-events: auto; }
+    .toast.wa { background: #25d366; box-shadow: 0 8px 25px rgba(37,211,102,0.4); }
+    .toast.payment { background: #B87333; box-shadow: 0 8px 25px rgba(184,115,51,0.4); }
+    .toast.error { background: #FF1744; box-shadow: 0 8px 25px rgba(255,23,68,0.4); }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
     .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 30; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
     .modal-overlay.show { display: flex; }
@@ -228,7 +230,7 @@
     <div class="proof-section-title"><span class="proof-badge"><span class="live-dot"></span> LIVE</span> BUKTI TRANSAKSI TERBARU</div>
     <div class="proof-gallery" id="proofGallery">
       <div id="proofLoading" class="proof-loading"><i class="fas fa-spinner fa-spin"></i> Memuat bukti transaksi...</div>
-      <div id="proofEmpty" class="proof-empty" style="display:none;">Belum ada bukti transaksi</div>
+      <div id="proofEmpty" class="proof-empty">Belum ada bukti transaksi</div>
       <div class="proof-track" id="proofTrack"></div>
     </div>
     <div class="proof-counter" id="proofCounter">0 / 0</div>
@@ -255,46 +257,21 @@
 
   <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Payment Modal - FINAL dengan Pengelompokan -->
+  <!-- Payment Modal -->
   <div class="modal-overlay" id="paymentModal">
     <div class="modal">
       <button class="float-right bg-transparent border-none text-white text-lg cursor-pointer" onclick="closePayment()">&times;</button>
       <h3 class="text-base font-['Montserrat'] font-bold mb-2" style="color:#B87333;"><i class="fas fa-wallet"></i> <span data-key="pay_title">Pembayaran Resmi</span></h3>
       <p class="text-[10px] text-[#999] mb-2" data-key="pay_desc">Silakan transfer ke salah satu rekening di bawah ini:</p>
-
-      <!-- 🌍 PEMBAYARAN GLOBAL -->
       <p class="payment-group-label" style="color:#0088cc;">🌍 Pembayaran Global</p>
-
-      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
-        <div class="text-[10px] text-[#ccc]"><strong>Bybit</strong><br><code class="text-[11px]" style="color:#B87333;">568168292</code><br><small>ShariangDev</small></div>
-        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('568168292')"><span data-key="copy_btn">📋 Salin</span></button>
-      </div>
-
-      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
-        <div class="text-[10px] text-[#ccc]"><strong>Binance</strong><br><code class="text-[11px]" style="color:#B87333;">483828402</code><br><small>Shariang Dev</small></div>
-        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('483828402')"><span data-key="copy_btn">📋 Salin</span></button>
-      </div>
-
-      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
-        <div class="text-[10px] text-[#ccc]"><strong>PayPal</strong><br><code class="text-[11px]" style="color:#B87333;">@theshariang</code></div>
-        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('@theshariang')"><span data-key="copy_btn">📋 Salin</span></button>
-      </div>
-
-      <!-- 🇮🇩 PEMBAYARAN DALAM NEGERI -->
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);"><div class="text-[10px] text-[#ccc]"><strong>Bybit</strong><br><code class="text-[11px]" style="color:#B87333;">568168292</code><br><small>ShariangDev</small></div><button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('568168292')"><span data-key="copy_btn">📋 Salin</span></button></div>
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);"><div class="text-[10px] text-[#ccc]"><strong>Binance</strong><br><code class="text-[11px]" style="color:#B87333;">483828402</code><br><small>Shariang Dev</small></div><button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('483828402')"><span data-key="copy_btn">📋 Salin</span></button></div>
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);"><div class="text-[10px] text-[#ccc]"><strong>PayPal</strong><br><code class="text-[11px]" style="color:#B87333;">@theshariang</code></div><button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('@theshariang')"><span data-key="copy_btn">📋 Salin</span></button></div>
       <p class="payment-group-label mt-3" style="color:#22c55e;">🇮🇩 Pembayaran Dalam Negeri</p>
-
-      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
-        <div class="text-[10px] text-[#ccc]"><strong>GoPay</strong><br><code class="text-[11px]" style="color:#B87333;">085232385558</code><br><small>Andreas E*** D*******</small></div>
-        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('085232385558')"><span data-key="copy_btn">📋 Salin</span></button>
-      </div>
-
-      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);">
-        <div class="text-[10px] text-[#ccc]"><strong>BNI</strong><br><code class="text-[11px]" style="color:#B87333;">1942943720</code><br><small>Andreas E*** D*******</small></div>
-        <button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('1942943720')"><span data-key="copy_btn">📋 Salin</span></button>
-      </div>
-
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);"><div class="text-[10px] text-[#ccc]"><strong>GoPay</strong><br><code class="text-[11px]" style="color:#B87333;">085232385558</code><br><small>Andreas E*** D*******</small></div><button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('085232385558')"><span data-key="copy_btn">📋 Salin</span></button></div>
+      <div class="flex items-center justify-between gap-2 p-2 rounded-lg mt-1.5" style="background:#0a0a0a;border:1px solid rgba(192,192,192,0.15);box-shadow:inset 0 2px 5px rgba(0,0,0,0.6);"><div class="text-[10px] text-[#ccc]"><strong>BNI</strong><br><code class="text-[11px]" style="color:#B87333;">1942943720</code><br><small>Andreas E*** D*******</small></div><button class="px-2 py-1 rounded-md font-semibold text-[9px] cursor-pointer metal-press" style="background:linear-gradient(145deg,#B87333,#8B4C1C);color:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.5);" onclick="copyText('1942943720')"><span data-key="copy_btn">📋 Salin</span></button></div>
       <p class="text-[9px] text-center mt-3" style="color:#B87333;" data-key="pay_warning">⚠️ Setelah transfer, klik tombol di bawah untuk konfirmasi</p>
-      <a href="https://wa.me/6283852330333?text=Halo%20Shariang%20Dev%2C%20saya%20sudah%20melakukan%20pembayaran.%20Berikut%20bukti%20transfernya%3A" target="_blank" class="block w-full text-center py-2.5 rounded-xl font-bold text-xs mt-2 no-underline metal-press" style="background:linear-gradient(145deg,#25d366,#1da851);color:#fff;box-shadow:0 4px 12px rgba(37,211,102,0.3);" data-key="confirm_btn">KONFIRMASI PEMBAYARAN</a>
+      <a href="https://wa.me/6283852330333?text=Halo%20Shariang%20Dev%2C%20saya%20sudah%20melakukan%20pembayaran.%20Berikut%20bukti%20transfernya%3A" target="_blank" class="block w-full text-center py-2.5 rounded-xl font-bold text-xs mt-2 no-underline metal-press" style="background:linear-gradient(145deg,#25d366,#1da851);color:#fff;box-shadow:0 4px 12px rgba(37,211,102,0.3);" data-key="confirm_btn">📤 KONFIRMASI PEMBAYARAN</a>
     </div>
   </div>
 
@@ -314,6 +291,25 @@
       const clickCounts={wa:1847,email:923,fb:1456,telegram:2103,tiktok:1678};
       let currentTesti=0,currentStep=0,currentProof=0,proofInterval,proofImages=[];
       let fetchedFileIds=new Set();
+
+      // ========== TOAST FUNCTION ==========
+      function showToast(message, type = '') {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+        const existingToasts = container.querySelectorAll('.toast');
+        if (existingToasts.length > 2) { existingToasts[0].remove(); }
+        const toast = document.createElement('div');
+        toast.className = 'toast ' + type;
+        toast.innerHTML = `<i class="fas ${type === 'error' ? 'fa-exclamation-circle' : 'fa-check-circle'}" style="font-size:0.8rem;"></i> ${message}`;
+        container.appendChild(toast);
+        setTimeout(() => {
+          if (toast.parentNode) {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => { if (toast.parentNode) toast.parentNode.removeChild(toast); }, 300);
+          }
+        }, 3000);
+      }
 
       async function fetchFromTelegram(){
         const urls=[];
@@ -348,9 +344,11 @@
           document.getElementById('proofLoading').style.display='none';
           document.getElementById('proofEmpty').style.display='block';
           proofImages=[];
+          showToast('⚠️ Belum ada bukti transaksi di channel', 'error');
         }else{
           document.getElementById('proofLoading').style.display='none';
           proofImages=urls;
+          showToast(`✅ ${urls.length} bukti transaksi berhasil dimuat!`, 'wa');
         }
         renderProofGallery();
         document.getElementById('proofCounter').textContent=proofImages.length>0?`1 / ${proofImages.length}`:'0 / 0';
@@ -384,17 +382,15 @@
       function startStepsInterval(){clearInterval(window._stepsInterval);window._stepsInterval=setInterval(nextStep,2500);}
       function resetStepsInterval(){clearInterval(window._stepsInterval);startStepsInterval();}
 
-      function showToast(message,type=''){const container=document.getElementById('toastContainer');const toast=document.createElement('div');toast.className='toast '+type;toast.innerHTML=`<span style="width:5px;height:5px;background:#22c55e;border-radius:50%;animation:pulse 1.5s infinite;"></span> ${message}`;container.appendChild(toast);setTimeout(()=>{if(toast.parentNode)toast.parentNode.removeChild(toast);},5000);}
-
       function updateLanguage(lang){currentLang=lang;const data=langData[lang];document.querySelectorAll('[data-key]').forEach(el=>{const key=el.getAttribute('data-key');if(data[key])el.textContent=data[key];});document.querySelectorAll('.service-accordion-card').forEach((card,index)=>{if(index<services.length){const s=services[index];const titleEl=card.querySelector('.service-title');const descEl=card.querySelector('.service-desc');const btn=card.querySelector('.order-btn');if(titleEl)titleEl.textContent=lang==='id'?s.titleId:s.titleEn;if(descEl)descEl.textContent=lang==='id'?s.descId:s.descEn;if(btn){const msg=lang==='id'?s.waMsgId:s.waMsgEn;btn.setAttribute('data-wa-message',msg);btn.querySelector('span').textContent=data.order_now||(lang==='id'?'Pesan Sekarang':'Order Now');}}});document.getElementById('whyRow').innerHTML=data.why.map(w=>`<span class="why-chip"><span class="check-led"><i class="fas fa-check"></i></span>${w}</span>`).join('');document.getElementById('contactButtons').innerHTML=data.contacts.map(c=>{const count=clickCounts[c.id]||0;return`<a href="${c.href}" target="_blank" class="flex items-center justify-between gap-2 px-2.5 py-2.5 rounded-xl text-decoration-none font-semibold text-[11px] text-[#E8E8E8] steel-plate-light metal-press" onclick="handleContactClick('${c.id}')"><span class="flex items-center gap-2"><i class="${c.icon}"></i> ${c.label}</span><span class="click-count-led" id="count_${c.id}">👥 ${count.toLocaleString()}</span></a>`;}).join('');initStepsSlider();}
 
       function renderAccordion(){const container=document.getElementById('servicesAccordion');const data=langData[currentLang];container.innerHTML='';services.forEach((service,idx)=>{const card=document.createElement('div');card.className='service-accordion-card steel-plate rounded-2xl p-0.5 card-3d transition-all duration-300';card.innerHTML=`<div class="rounded-2xl p-2.5 flex flex-col" style="background:#0d0d0d;"><div class="flex justify-between items-center cursor-pointer accordion-header" data-target="acc-content-${idx}"><h3 class="service-title font-['Montserrat'] font-bold text-xs text-[#E8E8E8] tracking-wide drop-shadow-md">${currentLang==='id'?service.titleId:service.titleEn}</h3><span class="text-lg rotate-icon transition-transform duration-300" style="color:#B87333;" id="acc-icon-${idx}">▶</span></div><div class="accordion-content text-[10px] text-[#B0B0B0] leading-relaxed" id="acc-content-${idx}"><p class="service-desc mb-2">${currentLang==='id'?service.descId:service.descEn}</p><button class="order-btn w-full py-2 rounded-xl text-white tracking-wider shadow-lg metal-press flex items-center justify-center transition-all text-[11px] danger-pulse" data-wa-message="${currentLang==='id'?service.waMsgId:service.waMsgEn}"><span>${data.order_now||(currentLang==='id'?'Pesan Sekarang':'Order Now')}</span></button></div></div>`;container.appendChild(card);});document.querySelectorAll('.accordion-header').forEach(header=>{header.addEventListener('click',function(){const targetId=this.getAttribute('data-target');const content=document.getElementById(targetId);const icon=document.getElementById('acc-icon-'+targetId.split('-')[2]);if(!content||!icon)return;document.querySelectorAll('.accordion-content').forEach(c=>{if(c.id!==targetId&&c.classList.contains('open')){c.classList.remove('open');const oi=document.getElementById('acc-icon-'+c.id.split('-')[2]);if(oi)oi.classList.remove('open');}});content.classList.toggle('open');icon.classList.toggle('open');});});document.querySelectorAll('.order-btn').forEach(btn=>{btn.addEventListener('click',function(e){e.stopPropagation();const msg=this.getAttribute('data-wa-message')||'Halo Shariang Dev';window.open(`https://wa.me/6283852330333?text=${encodeURIComponent(msg)}`,'_blank');showToast('📤 Membuka WhatsApp...','wa');});});}
 
-      document.getElementById('langToggle').addEventListener('click',()=>{const knob=document.getElementById('langKnob');if(currentLang==='id'){knob.style.transform='translateX(1.3rem)';updateLanguage('en');showToast('Language: English 🇬🇧','payment');}else{knob.style.transform='translateX(0)';updateLanguage('id');showToast('Bahasa: Indonesia 🇮🇩','payment');}renderAccordion();});
+      document.getElementById('langToggle').addEventListener('click',()=>{const knob=document.getElementById('langKnob');if(currentLang==='id'){knob.style.transform='translateX(1.3rem)';updateLanguage('en');showToast('🇬🇧 Language: English','wa');}else{knob.style.transform='translateX(0)';updateLanguage('id');showToast('🇮🇩 Bahasa: Indonesia','payment');}renderAccordion();});
       window.handleContactClick=function(id){clickCounts[id]=(clickCounts[id]||0)+1;const el=document.getElementById('count_'+id);if(el){el.textContent='👥 '+clickCounts[id].toLocaleString();el.style.transform='scale(1.2)';setTimeout(()=>{el.style.transform='scale(1)';},300);}};
       window.openPayment=function(){document.getElementById('paymentModal').classList.add('show');};
       window.closePayment=function(){document.getElementById('paymentModal').classList.remove('show');};
-      window.copyText=function(text){navigator.clipboard.writeText(text).then(()=>{showToast('✅ '+(currentLang==='id'?'Nomor berhasil disalin!':'Number copied!'),'payment');});};
+      window.copyText=function(text){navigator.clipboard.writeText(text).then(()=>{showToast('✅ Nomor berhasil disalin!','wa');}).catch(()=>{showToast('⚠️ Gagal menyalin, coba lagi','error');});};
 
       function updateTime(){const now=new Date();const wib=new Date(now.toLocaleString('en-US',{timeZone:'Asia/Jakarta'}));document.getElementById('indonesiaTime').textContent=wib.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
       setInterval(updateTime,1000);updateTime();
@@ -402,6 +398,54 @@
       setInterval(updateVisitors,8000);updateVisitors();
       function updateClickCounts(){Object.keys(clickCounts).forEach(id=>{clickCounts[id]+=Math.floor(Math.random()*3);const el=document.getElementById('count_'+id);if(el)el.textContent='👥 '+clickCounts[id].toLocaleString();});}
       setInterval(updateClickCounts,15000);
+
+      // ========== RANDOM TOAST NOTIFICATIONS ==========
+      function randomVisitorToast() {
+        const items = [
+          {flag:"🇵🇰",city:"Karachi",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇺🇸",city:"New York",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇨🇳",city:"Shanghai",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇮🇩",city:"Jakarta",msg:"baru saja order Jasa Pendirian Badan Usaha"},
+          {flag:"🇮🇩",city:"Bandung",msg:"baru saja order Media Sosial Booster"},
+          {flag:"🇮🇩",city:"Surabaya",msg:"baru saja order Pembuatan Aplikasi"},
+          {flag:"🇮🇩",city:"Medan",msg:"baru saja order Google Play Console"},
+          {flag:"🇸🇬",city:"Singapore",msg:"just purchased Google Play Console"},
+          {flag:"🇲🇾",city:"Kuala Lumpur",msg:"just ordered Website Development"},
+          {flag:"🇮🇩",city:"Yogyakarta",msg:"baru saja order Website Development"},
+          {flag:"🇵🇰",city:"Lahore",msg:"just purchased Indonesian Phone Numbers"},
+          {flag:"🇺🇸",city:"Los Angeles",msg:"just ordered Social Media Booster"},
+        ];
+        const item = items[Math.floor(Math.random() * items.length)];
+        const mins = Math.floor(Math.random() * 8) + 1;
+        showToast(`📱 ${item.flag} Someone from ${item.city} ${item.msg} • ${mins}m ago`, 'wa');
+        setTimeout(randomVisitorToast, Math.floor(Math.random() * 8000) + 5000);
+      }
+
+      function randomPaymentToast() {
+        if (Math.random() > 0.5) {
+          const countries = [
+            {flag:"🇵🇰",city:"Islamabad"},
+            {flag:"🇨🇳",city:"Shenzhen"},
+            {flag:"🇺🇸",city:"Chicago"},
+            {flag:"🇸🇬",city:"Singapore"},
+            {flag:"🇲🇾",city:"Penang"},
+          ];
+          const c = countries[Math.floor(Math.random() * countries.length)];
+          const amount = '$' + (Math.floor(Math.random() * 500) + 100).toLocaleString();
+          showToast(`💰 ${c.flag} Payment ${amount} via Binance confirmed!`, 'payment');
+        } else {
+          const amount = 'Rp ' + (Math.floor(Math.random() * 5000001) + 300000).toLocaleString('id-ID');
+          showToast(`💰 🇮🇩 Pembayaran ${amount} via BNI dikonfirmasi!`, 'payment');
+        }
+        setTimeout(randomPaymentToast, Math.floor(Math.random() * 15000) + 10000);
+      }
+
+      // Mulai toast random setelah 3 detik
+      setTimeout(() => {
+        randomVisitorToast();
+        setTimeout(randomPaymentToast, 5000);
+      }, 3000);
+
       document.addEventListener('click',function(e){if(e.target===document.getElementById('paymentModal'))closePayment();});
 
       updateLanguage('id');renderAccordion();initTestiBanner();loadProofImages();
